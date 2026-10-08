@@ -1,0 +1,1413 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Laboratorio de pruebas del Grupo 7: análisis de la identidad visual de Santander según Chaves y Belluccia.">
+<title>Laboratorio del signo Santander</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Nunito:wght@700&display=swap">
+<style>
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+img { max-width: 100%; }
+
+/* Layout: a lab bench. Guide spec sheet + scorecard first, sticky index of the 11 Chaves–Belluccia criteria, then one test per criterion: protocol card | light table. */
+:root {
+  --bg: #d3d9e0;
+  --surface: #ffffff;
+  --ink: #15191e;
+  --muted: #59626d;
+  --line: #c6cdd6;
+  --accent: #0d6a66;
+  --accent-soft: #d8ecea;
+  --pass: #1d7a4c;
+  --pass-soft: #dcefe4;
+  --fail: #a64b0a;
+  --fail-soft: #f6e5d6;
+  --paper: #ffffff;
+  --soft: #f4f6f8;
+  --guide: #6b6bf0;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #07090b; --surface: #1b2027; --ink: #e7eaee; --muted: #9aa3ad; --line: #333b45;
+    --accent: #5cbcb5; --accent-soft: #173533; --pass: #6cc89a; --pass-soft: #163527;
+    --fail: #f0a265; --fail-soft: #3a2616; --paper: #fbfbfa; --guide: #9a9af7; --soft: #15191e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #07090b; --surface: #1b2027; --ink: #e7eaee; --muted: #9aa3ad; --line: #333b45;
+  --accent: #5cbcb5; --accent-soft: #173533; --pass: #6cc89a; --pass-soft: #163527;
+  --fail: #f0a265; --fail-soft: #3a2616; --paper: #fbfbfa; --guide: #9a9af7; --soft: #15191e; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--body); padding-inline: 16px; padding-block: 0 48px; }
+.wrap { max-width: 1400px; margin: 0 auto; }
+header.top { padding-block: 40px 24px; display: grid; gap: 14px; }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 800 clamp(30px, 5vw, 48px)/1.05 var(--display); margin: 0; letter-spacing: -.015em; text-wrap: balance; max-width: 20ch; }
+.lead { margin: 0; max-width: 66ch; font-size: 17px; }
+.note { margin: 0; max-width: 76ch; font-size: 13px; color: var(--muted); }
+a { color: var(--accent); text-underline-offset: 3px; }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 14px; margin-bottom: 20px; min-width: 0; }
+.panel-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+.panel h2 { font: 700 20px/1.2 var(--display); margin: 0; }
+.twocol { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+@media (min-width: 980px) { .twocol { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .twocol .panel { margin-bottom: 0; } .twocol { margin-bottom: 20px; } }
+.tally { font: 500 14px/1 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.tally b { color: var(--ink); font-weight: 500; }
+.tablebox { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-top: 1px solid var(--line); vertical-align: top; }
+th { font: 500 11px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-top: 0; }
+td.num { font: 500 13px/1.4 var(--mono); color: var(--muted); width: 34px; }
+td.pg { font: 400 12px/1.5 var(--mono); color: var(--muted); white-space: nowrap; }
+td a { color: var(--ink); text-decoration-color: var(--line); }
+td a:hover { text-decoration-color: var(--accent); }
+.swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; border: 1px solid rgba(0,0,0,.15); }
+.pill { display: inline-block; font: 500 12px/1 var(--mono); padding: 5px 9px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.pill.pass { background: var(--pass-soft); color: var(--pass); border-color: transparent; }
+.pill.fail { background: var(--fail-soft); color: var(--fail); border-color: transparent; }
+.row-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+.linkbtn { background: none; border: 0; padding: 0; font: 500 13px/1 var(--body); color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+#copy-fallback { width: 100%; min-height: 120px; font: 400 13px/1.5 var(--mono); padding: 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+
+nav.jump { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--line); }
+nav.jump ol { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin; }
+nav.jump a { display: flex; gap: 6px; align-items: center; white-space: nowrap; font: 500 12px/1 var(--mono); color: var(--ink); text-decoration: none; padding: 7px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+nav.jump a .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+nav.jump a .dot.pass { background: var(--pass); }
+nav.jump a .dot.fail { background: var(--fail); }
+nav.jump a:hover { border-color: var(--accent); }
+
+.test { display: grid; grid-template-columns: minmax(0, 1fr); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 24px; overflow: clip; scroll-margin-top: 64px; box-shadow: 0 1px 2px rgba(15,25,40,.06); }
+@media (min-width: 900px) { .test { grid-template-columns: minmax(280px, 340px) minmax(0, 1fr); } }
+.protocol { position: relative; z-index: 1; background: var(--surface); padding: 22px; display: grid; gap: 14px; align-content: start; border-bottom: 1px solid var(--line); }
+@media (min-width: 900px) { .protocol { border-bottom: 0; position: sticky; top: 56px; align-self: start; } .bench { border-left: 1px solid var(--line); } }
+.step { font: 500 12px/1 var(--mono); color: var(--muted); letter-spacing: .06em; }
+.protocol h2 { font: 700 24px/1.1 var(--display); margin: 0; }
+.protocol .def { font-size: 14px; color: var(--muted); margin: -6px 0 0; }
+.protocol p { margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 12px/1 var(--mono); padding: 5px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.criterion { border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; font-size: 15px; }
+.criterion b, .src b { display: block; font: 500 11px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.src { font-size: 13px; color: var(--muted); }
+.verdict { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.verdict span { font-size: 13px; color: var(--muted); margin-right: 4px; }
+.vbtn { font: 500 14px/1 var(--body); padding: 9px 14px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.vbtn:hover { border-color: var(--muted); }
+.vbtn[aria-pressed="true"][data-v="pass"] { background: var(--pass-soft); border-color: var(--pass); color: var(--pass); }
+.vbtn[aria-pressed="true"][data-v="fail"] { background: var(--fail-soft); border-color: var(--fail); color: var(--fail); }
+
+.bench { padding: 22px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: start; }
+.split > .col { display: grid; gap: 12px; align-content: start; min-width: 0; }
+@media (min-width: 1180px) { .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.split .attrs { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.split .legend { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; }
+.seg button { font: 500 13px/1 var(--body); padding: 8px 11px; border: 0; background: var(--surface); color: var(--muted); cursor: pointer; border-right: 1px solid var(--line); }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; }
+.tog { font: 500 13px/1 var(--body); padding: 8px 11px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.tog[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.range { display: grid; gap: 4px; flex: 1 1 220px; min-width: 0; }
+.range label { font: 500 12px/1.3 var(--mono); color: var(--muted); display: flex; justify-content: space-between; gap: 8px; font-variant-numeric: tabular-nums; }
+.range label output { color: var(--ink); }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.presets button { font: 500 12px/1 var(--mono); padding: 6px 9px; border-radius: 5px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.presets button:hover { border-color: var(--accent); }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.table-light { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; min-height: 100px; display: grid; place-items: center; overflow: hidden; position: relative; }
+.table-light.grid-bg { background-image: linear-gradient(#e9edf1 1px, transparent 1px), linear-gradient(90deg, #e9edf1 1px, transparent 1px); background-size: 8px 8px; }
+.table-light canvas { display: block; max-width: 100%; }
+.scroll-x { overflow-x: auto; padding: 16px; width: 100%; display: flex; justify-content: center; }
+.label { font: 500 11px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.readout { font: 400 13px/1.5 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; margin: 0; }
+.readout b { color: var(--ink); font-weight: 500; }
+.pixelated { image-rendering: pixelated; }
+.status { font: 500 12px/1 var(--mono); padding: 5px 8px; border-radius: 4px; }
+.status.ok { background: var(--pass-soft); color: var(--pass); }
+.status.ko { background: var(--fail-soft); color: var(--fail); }
+.quote { border: 1px dashed var(--line); border-radius: 8px; padding: 12px 14px; font-size: 15px; background: var(--bg); }
+.quote .label { display: block; margin-bottom: 4px; }
+
+.countdown { position: absolute; top: 10px; right: 12px; font: 500 13px/1 var(--mono); color: #59626d; }
+.startbtn { font: 600 15px/1 var(--body); padding: 12px 18px; border-radius: 7px; border: 0; background: var(--accent); color: var(--surface); cursor: pointer; }
+.startbtn:disabled { opacity: .5; cursor: default; }
+.quiz { display: grid; gap: 10px; }
+.quiz label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.quiz input, .textin { font: 400 15px/1.3 var(--body); padding: 9px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); width: 100%; }
+
+.attrs { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; }
+.attr { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; }
+.attr .nm { font-size: 14px; }
+.attr .nm small { display: block; font: 400 11px/1.3 var(--mono); color: var(--muted); }
+.yn { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; flex: none; }
+.yn button { font: 500 12px/1 var(--body); padding: 7px 9px; border: 0; background: var(--surface); color: var(--muted); cursor: pointer; }
+.yn button + button { border-left: 1px solid var(--line); }
+.yn button[aria-pressed="true"][data-a="si"] { background: var(--pass-soft); color: var(--pass); }
+.yn button[aria-pressed="true"][data-a="no"] { background: var(--fail-soft); color: var(--fail); }
+
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 6px; }
+.swbtn { display: grid; gap: 4px; padding: 6px; border-radius: 7px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; text-align: left; font: 500 12px/1.2 var(--body); }
+.swbtn i { display: block; height: 26px; border-radius: 4px; border: 1px solid rgba(0,0,0,.12); }
+.swbtn small { font: 400 10px/1.2 var(--mono); color: var(--muted); }
+.swbtn[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.tiles.three { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.tile { display: grid; gap: 6px; margin: 0; align-content: start; }
+.tile canvas { width: 100%; display: block; border-radius: 6px; border: 1px solid var(--line); }
+.tile figcaption { font-size: 13px; color: var(--muted); }
+.tile figcaption b { color: var(--ink); font-weight: 600; display: block; }
+
+.choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.choice { padding: 0; border: 2px solid var(--line); border-radius: 8px; background: var(--paper); cursor: pointer; overflow: hidden; }
+.choice canvas { display: block; width: 100%; }
+.choice.right { border-color: var(--pass); }
+.choice.wrong { border-color: var(--fail); }
+.choice:disabled { cursor: default; }
+
+.searchgrid { display: grid; gap: 4px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+.cell { aspect-ratio: 1; border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 4px; }
+.cell canvas { width: 100%; height: 100%; display: block; }
+.cell.miss { outline: 2px solid var(--fail); }
+.results { display: flex; flex-wrap: wrap; gap: 10px; }
+.result { border: 1px solid var(--line); border-radius: 7px; padding: 8px 12px; font: 400 13px/1.4 var(--mono); color: var(--muted); }
+.result b { display: block; font: 500 20px/1.2 var(--mono); color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.wheel svg { width: 100%; height: auto; display: block; max-width: 460px; margin: 0 auto; }
+.wheel .lbl { font: 500 11px var(--mono); fill: var(--ink); }
+.wheel .ax { stroke: var(--line); fill: none; }
+.wheel .axt { font: 400 10px var(--mono); fill: var(--muted); }
+.legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 4px 12px; font-size: 13px; }
+.legend span { font: 400 12px var(--mono); color: var(--muted); }
+
+
+.ficha { grid-column: 1 / -1; position: relative; z-index: 2; border-top: 1px solid var(--line); background: var(--soft); padding: 18px 22px; display: grid; gap: 12px; }
+.ficha-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline; }
+.ficha-head .score { font: 500 13px/1.3 var(--mono); color: var(--muted); }
+.ficha-head .score b { color: var(--ink); font-weight: 600; }
+.ficha-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 24px; margin: 0; }
+.ficha-grid dt { font: 500 11px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.ficha-grid dd { margin: 0; font-size: 14px; }
+.dato { display: inline-block; font: 500 11px/1.5 var(--mono); padding: 0 6px; border-radius: 4px; background: var(--fail-soft); color: var(--fail); }
+.doc { scroll-margin-top: 64px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px 28px; }
+.facts p { margin: 4px 0 0; font-size: 15px; }
+#criticas td { font-size: 14px; }
+footer { margin-top: 28px; font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-width: 84ch; }
+footer p { margin: 0; }
+footer a { word-break: break-all; }
+.refs-title { font: 700 16px/1.2 var(--display); color: var(--ink); margin: 0; }
+.refs { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; }
+.refs li { padding-left: 2em; text-indent: -2em; }
+.authors { margin: 0; font: 500 14px/1.5 var(--body); color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Grupo 7 · Comunicación corporativa · Análisis de identidad visual</div>
+    <h1>Laboratorio de pruebas del signo Santander</h1>
+    <p class="authors">Orianna Bardales Medina · Lara Feijóo Vázquez · Alberto Guijarro Ruiz · Ana Cristina Salazar</p>
+    <p class="lead">Once pruebas, una por cada criterio de calidad de Chaves y Belluccia, construidas sobre las especificaciones de la Guía básica de marca de Santander (Banco Santander, 2020). Haz cada prueba, marca tu veredicto y compáralo con el nuestro. Debajo de cada prueba está su ficha de evidencia: este laboratorio es también el anexo de nuestra presentación.</p>
+    <p class="note">Trabajo académico de máster, sin relación con Banco Santander. Imagen de partida: logotipo horizontal en mapa de bits de 500 × 88 px; las ampliaciones y la versión secundaria se reconstruyen a partir de ella. Tiempo estimado: 10–12 minutos.</p>
+  </header>
+
+  <div class="twocol">
+    <section class="panel" aria-labelledby="spec-title">
+      <div class="panel-head"><h2 id="spec-title">Ficha técnica de la guía</h2><a href="https://www.santander.com/content/dam/santander-com/es/documentos/marca-santander/Guia_Marca_060520_es.pdf" target="_blank" rel="noopener">Abrir la guía (PDF)</a></div>
+      <div class="tablebox">
+        <table>
+          <thead><tr><th>Especificación</th><th>Valor</th><th>Pág.</th></tr></thead>
+          <tbody>
+            <tr><td>Versiones</td><td>Principal (horizontal), secundaria (vertical) y símbolo; positivo y negativo</td><td class="pg">p. 6</td></tr>
+            <tr><td>Blanco y negro</td><td>Versión propia para cuando no se puede imprimir en rojo</td><td class="pg">p. 7</td></tr>
+            <tr><td>Espacio de seguridad</td><td>Ideal: el ancho del símbolo. Mínimo: la mitad. Símbolo: retícula de 28 × 28 módulos</td><td class="pg">p. 8</td></tr>
+            <tr><td>Tamaños mínimos</td><td>Principal 25 px / 3 mm · Secundaria 50 px / 5 mm · Símbolo 16 px / 3 mm</td><td class="pg">p. 8</td></tr>
+            <tr><td>Cobranding</td><td>Separación de 4 módulos con una línea de 1 pt en el centro</td><td class="pg">p. 9</td></tr>
+            <tr><td>Color principal</td><td><span class="swatch" style="background:#ec0000"></span>Santander Red · Pantone 485 C · C0 M100 Y100 K0 · #EC0000</td><td class="pg">p. 12</td></tr>
+            <tr><td>Fondos permitidos</td><td>Solo Santander Red, Rio, Lisbon y blanco</td><td class="pg">p. 12</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="score-title">
+      <div class="panel-head"><h2 id="score-title">Resumen de tu revisión</h2><div class="tally" id="tally"></div></div>
+      <div class="tablebox">
+        <table>
+          <thead><tr><th>N.º</th><th>Criterio</th><th>Su veredicto</th><th>Grupo 7</th></tr></thead>
+          <tbody id="score-body"></tbody>
+        </table>
+      </div>
+      <div class="row-actions">
+        <button class="linkbtn" id="copy" type="button">Copiar el resumen</button>
+        <button class="linkbtn" id="reset" type="button">Borrar mis veredictos</button>
+        <span class="readout" id="copy-msg" aria-live="polite"></span>
+      </div>
+      <textarea id="copy-fallback" readonly hidden aria-label="Resumen para copiar"></textarea>
+    </section>
+  </div>
+
+  <section class="panel doc" id="contexto" aria-labelledby="ctx-title">
+    <div class="panel-head"><h2 id="ctx-title">Contexto: el cambio de 2018</h2></div>
+    <div class="facts">
+      <div><span class="label">Qué cambió</span><p>La llama se estiliza, el nombre pierde los remates y el rojo pasa del Pantone 032 al 485, más brillante. Llegan también tipografía propia, iconos, ilustraciones y tono de voz (García, 2018; Reason Why, 2018).</p></div>
+      <div><span class="label">Quién</span><p>Interbrand Madrid, con una familia tipográfica propia desarrollada junto a Monotype (García, 2018).</p></div>
+      <div><span class="label">Por qué</span><p>Conectar con un cliente digital. Según el banco, la visibilidad mejoró un 20 % en el móvil. «Evolución, no revolución», en palabras de Ana Botín (Reason Why, 2018).</p></div>
+      <div><span class="label">Historia</span><p>Fundación en 1857; la llama, en 1986; el rojo, desde 1989; marca internacional desde 2004. La de 2018 es la novena evolución de la marca (Banco Santander, 2022).</p></div>
+    </div>
+  </section>
+
+  <nav class="jump" aria-label="Índice de pruebas"><ol id="jump"></ol></nav>
+
+  <!-- 1 PERTINENCIA -->
+  <article class="test" id="c1">
+    <div class="protocol">
+      <div class="step">CRITERIO 1 DE 11</div>
+      <h2>Pertinencia</h2>
+      <p class="def">Adecuación formal al sector, al contexto y a la naturaleza de la organización.</p>
+      <div class="chips"><span class="chip">Lo declarado frente a lo percibido</span></div>
+      <p>La guía declara qué debe transmitir el signo. Mira el logotipo y marca, atributo por atributo, si lo percibes. Hemos añadido tres atributos que el sector financiero exige a cualquier banco.</p>
+      <p class="src"><b>Fuente</b>Banco Santander (2020), p. 5: «La llama emite luz, calor y humanidad y emerge de una plataforma sólida y ovalada. El uso del rojo remite a la energía, fuerza, valentía y liderazgo».</p>
+      <p class="criterion"><b>Supera si</b>percibes al menos 8 de los 12 atributos.</p>
+      <div class="verdict" data-test="1"></div>
+    </div>
+    <div class="bench">
+      <div class="split">
+        <div class="col"><div class="table-light" id="p1-stage"><canvas id="p1-canvas"></canvas></div><p class="readout" id="p1-readout"></p></div>
+        <div class="col"><div class="attrs" id="p1-attrs"></div></div>
+      </div>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 1">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 1</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×2</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>Banco Santander (2020, p. 5): la llama «emite luz, calor y humanidad» y nace de una plataforma sólida; el rojo remite a energía, fuerza, valentía y liderazgo.</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd>«Parece una entidad financiera»: media <span class="dato">pendiente</span>/5 · <span class="dato">pendiente</span> % con 4 o 5. Atributos más marcados: <span class="dato">pendiente</span>.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>La plataforma ovalada aporta la solidez que exige la banca y la llama, la calidez de una marca cercana.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 2 REPRODUCIBILIDAD -->
+  <article class="test" id="c2">
+    <div class="protocol">
+      <div class="step">CRITERIO 2 DE 11</div>
+      <h2>Reproducibilidad</h2>
+      <p class="def">Capacidad para replicarse con precisión en cualquier formato o técnica.</p>
+      <div class="chips"><span class="chip">Monocromía</span><span class="chip">Fotocopia de fotocopia</span></div>
+      <p>Primero, las versiones de color que prevé la guía. Después, el peor caso: cada generación es la copia de la anterior, con pérdida de nitidez, ruido de tóner y trazos que se cierran o se rompen.</p>
+      <p class="src"><b>Fuente</b>Banco Santander (2020), p. 6 (positivo y negativo) y p. 7 (versión en blanco y negro).</p>
+      <p class="criterion"><b>Supera si</b>el signo se identifica en todas las versiones de color y en la sexta generación de fotocopia.</p>
+      <div class="verdict" data-test="2"></div>
+    </div>
+    <div class="bench">
+      <div class="split">
+        <div class="col">
+          <div class="label">A · Versiones de color</div>
+          <div class="controls"><div class="seg" role="group" aria-label="Versión de color" data-seg="p2-mode" id="p2-seg"></div></div>
+          <div class="table-light" id="p2-stage"><canvas id="p2-canvas"></canvas></div>
+          <p class="readout" id="p2-readout"></p>
+        </div>
+        <div class="col">
+          <div class="label">B · Fotocopia de fotocopia</div>
+          <div class="controls">
+            <div class="range">
+              <label for="p2-gen">Generación <output id="p2-gen-out"></output></label>
+              <input type="range" id="p2-gen" min="0" max="10" value="6">
+            </div>
+          </div>
+          <div class="table-light" id="p2b-stage"><canvas id="p2b-canvas"></canvas></div>
+        </div>
+      </div>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 2">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 2</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×2</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>Versiones positiva y negativa (p. 6), versión en blanco y negro (p. 7) y artes finales en CMYK, PMS, RGB y B/N (p. 10).</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd>No aplica: es una propiedad técnica, comprobada en esta prueba.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Formas cerradas y sin detalles finos: nada se pierde al reducir a una tinta. Contraste del positivo: 4,6:1.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 3 LEGIBILIDAD -->
+  <article class="test" id="c3">
+    <div class="protocol">
+      <div class="step">CRITERIO 3 DE 11</div>
+      <h2>Legibilidad</h2>
+      <p class="def">Claridad para interpretar las letras o caracteres del signo.</p>
+      <div class="chips"><span class="chip">Tamaños mínimos</span><span class="chip">Espacio de seguridad</span></div>
+      <p>Reduce cada versión hasta su mínimo oficial y por debajo. La lupa muestra los píxeles que quedan en una pantalla estándar. Debajo, el espacio de seguridad tal como lo define la guía.</p>
+      <p class="src"><b>Fuente</b>Banco Santander (2020), p. 8: mínimos de 25 px (principal), 50 px (secundaria) y 16 px (símbolo).</p>
+      <p class="criterion"><b>Supera si</b>en su tamaño mínimo oficial cada versión se lee y se reconoce sin dudas.</p>
+      <div class="verdict" data-test="3"></div>
+    </div>
+    <div class="bench">
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Versión del logotipo" data-seg="p3-variant">
+          <button type="button" data-val="full" aria-pressed="true">Principal</button>
+          <button type="button" data-val="secondary" aria-pressed="false">Secundaria</button>
+          <button type="button" data-val="symbol" aria-pressed="false">Símbolo</button>
+        </div>
+        <div class="range">
+          <label for="p3-size">Altura <output id="p3-size-out"></output></label>
+          <input type="range" id="p3-size" min="8" max="120" value="25">
+        </div>
+      </div>
+      <div class="presets">
+        <button type="button" id="p3-min">Ir al mínimo oficial</button>
+        <button type="button" data-size="16">16 px · favicon</button>
+        <button type="button" data-size="48">48 px · icono de app</button>
+        <button type="button" data-size="96">96 px · cartel</button>
+      </div>
+      <div class="split">
+        <div class="col">
+          <div class="label">Tamaño real <span class="status" id="p3-status"></span></div>
+          <div class="table-light"><div class="scroll-x"><canvas id="p3-real"></canvas></div></div>
+          <div class="label" id="p3-zoom-label">Lupa</div>
+          <div class="table-light grid-bg"><div class="scroll-x"><canvas id="p3-zoom" class="pixelated"></canvas></div></div>
+          <p class="readout" id="p3-readout"></p>
+        </div>
+        <div class="col">
+          <div class="label">Espacio de seguridad · discontinuo = ideal · continuo = mínimo</div>
+          <div class="table-light" id="p3s-stage"><canvas id="p3s-canvas"></canvas></div>
+        </div>
+      </div>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 3">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 3</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×2</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>Mínimos de 25 px (principal), 50 px (secundaria) y 16 px (símbolo); espacio de seguridad igual al ancho del símbolo (p. 8).</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd>«El nombre se lee con claridad»: media <span class="dato">pendiente</span>/5.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>La letra sin remates gana nitidez en pantalla (García, 2018). Restamos un punto porque la versión secundaria necesita el doble de tamaño mínimo.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 4 INTELIGIBILIDAD -->
+  <article class="test" id="c4">
+    <div class="protocol">
+      <div class="step">CRITERIO 4 DE 11</div>
+      <h2>Inteligibilidad</h2>
+      <p class="def">Facilidad para ser comprendido conceptualmente por el espectador.</p>
+      <div class="chips"><span class="chip">Exposición de 5 segundos</span></div>
+      <p>Verás solo el símbolo durante 5 segundos. Cuando desaparezca, escribe qué representa. Después compáralo con lo que declara la guía. Es la misma prueba que hemos hecho con participantes.</p>
+      <p class="criterion"><b>Supera si</b>identificas una llama o un fuego sin ayuda.</p>
+      <div class="verdict" data-test="4"></div>
+    </div>
+    <div class="bench">
+      <div class="split">
+      <div class="col">
+      <div class="controls"><button type="button" class="startbtn" id="p4-start">Empezar: 5 segundos</button></div>
+      <div class="table-light" id="p4-stage"><canvas id="p4-canvas"></canvas><div class="countdown" id="p4-count" aria-live="polite"></div></div>
+      </div>
+      <div class="col">
+      <p class="readout">Cuando se retire la imagen, responde aquí.</p>
+      <form class="quiz" id="p4-quiz" hidden>
+        <label for="p4-q">¿Qué forma u objeto representaba?<input id="p4-q" type="text" autocomplete="off"></label>
+        <div><button type="submit" class="vbtn">Comparar con la guía</button></div>
+      </form>
+      <div class="quote" id="p4-reveal" hidden><span class="label">Lo que declara la guía (p. 5)</span>Una llama que emite luz, calor y humanidad, y que emerge de una plataforma sólida y ovalada. <span id="p4-yours"></span></div>
+      </div>
+      </div>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 4">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 4</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×1</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>La guía declara una llama que emerge de una plataforma ovalada (p. 5).</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd><span class="dato">pendiente</span> % nombró una llama o un fuego tras 5 segundos. Palabras más repetidas: <span class="dato">pendiente</span>.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Provisional: sube a 5 si más del 70 % identifica la llama y baja a 3 si no llega al 40 %.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 5 SUFICIENCIA -->
+  <article class="test" id="c5">
+    <div class="protocol">
+      <div class="step">CRITERIO 5 DE 11</div>
+      <h2>Suficiencia</h2>
+      <p class="def">Grado de síntesis: el signo no necesita elementos decorativos superfluos.</p>
+      <div class="chips"><span class="chip">Prueba de añadidos</span><span class="chip">Ojos entornados</span></div>
+      <p>Añade los recursos decorativos típicos de los logotipos (sombra, degradado, bisel, contorno, brillo) y observa si alguno mejora el signo. Compáralo también a 24 px, donde se nota lo que sobra. El desenfoque deja solo la estructura.</p>
+      <p class="criterion"><b>Supera si</b>ningún añadido mejora el signo y todos empeoran la lectura a tamaño pequeño.</p>
+      <div class="verdict" data-test="5"></div>
+    </div>
+    <div class="bench">
+      <div class="toggles" id="p5-fx" role="group" aria-label="Añadidos decorativos">
+        <button type="button" class="tog" data-fx="shadow" aria-pressed="false">Sombra</button>
+        <button type="button" class="tog" data-fx="gradient" aria-pressed="false">Degradado</button>
+        <button type="button" class="tog" data-fx="bevel" aria-pressed="false">Bisel</button>
+        <button type="button" class="tog" data-fx="outline" aria-pressed="false">Contorno</button>
+        <button type="button" class="tog" data-fx="gloss" aria-pressed="false">Brillo</button>
+      </div>
+      <div class="controls">
+        <div class="range">
+          <label for="p5-blur">Desenfoque <output id="p5-blur-out">0 px</output></label>
+          <input type="range" id="p5-blur" min="0" max="20" value="0">
+        </div>
+      </div>
+      <div class="split">
+        <div class="col"><div class="table-light" id="p5-stage"><canvas id="p5-canvas"></canvas></div></div>
+        <div class="col">
+          <div class="label">A 24 px · original y con añadidos</div>
+          <div class="table-light"><div class="scroll-x" style="gap:28px;align-items:center"><canvas id="p5-small-a"></canvas><canvas id="p5-small-b"></canvas></div></div>
+          <p class="readout" id="p5-readout"></p>
+        </div>
+      </div>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 5">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 5</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×1</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>La guía no admite efectos: versiones planas a una tinta (pp. 6–7).</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd>No aplica.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Inventario del signo: 2 elementos, 1 color plano y 0 efectos. Ningún añadido lo mejora.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 6 VERSATILIDAD -->
+  <article class="test" id="c6">
+    <div class="protocol">
+      <div class="step">CRITERIO 6 DE 11</div>
+      <h2>Versatilidad</h2>
+      <p class="def">Capacidad de adaptarse a múltiples plataformas y soportes sin perder coherencia.</p>
+      <div class="chips"><span class="chip">Paleta oficial</span><span class="chip">Contextos de uso</span></div>
+      <p>Prueba el signo sobre cada color de la paleta oficial. La guía decide la versión (positivo o negativo) e indica qué fondos están permitidos. Debajo, el mismo signo en seis soportes reales, sin redibujarlo.</p>
+      <p class="src"><b>Fuente</b>Banco Santander (2020), p. 12: paleta de colores primarios; solo los marcados con asterisco pueden usarse como fondo.</p>
+      <p class="criterion"><b>Supera si</b>el signo funciona en todos los fondos permitidos y en los seis contextos sin cambiar su forma.</p>
+      <div class="verdict" data-test="6"></div>
+    </div>
+    <div class="bench">
+      <div class="split">
+        <div class="col"><div class="label">Fondo · * = permitido por la guía</div><div class="swatches" id="p6-sw" role="group" aria-label="Color de fondo"></div></div>
+        <div class="col"><div class="table-light" id="p6-stage"><canvas id="p6-canvas"></canvas></div><p class="readout" id="p6-readout"></p></div>
+      </div>
+      <div class="tiles" id="p6-tiles"></div>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 6">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 6</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×2</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>Tres versiones para tres situaciones (p. 6); solo cuatro fondos permitidos: Santander Red, Rio, Lisbon y blanco (p. 12).</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd>No aplica.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>El sistema prevé una versión para cada restricción de espacio, en lugar de deformar el signo.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 7 VIGENCIA -->
+  <article class="test" id="c7">
+    <div class="protocol">
+      <div class="step">CRITERIO 7 DE 11</div>
+      <h2>Vigencia</h2>
+      <p class="def">Capacidad de resistir el paso del tiempo y las modas sin quedar obsoleto.</p>
+      <div class="chips"><span class="chip">Máquina del tiempo de estilos</span></div>
+      <p>El mismo icono de aplicación vestido con las modas gráficas de tres épocas. Las modas envejecen; la forma plana y geométrica, que es la que usa la marca, no depende de ninguna.</p>
+      <p class="src"><b>Fuente</b>Banco Santander (2020), p. 6: el símbolo en solitario sobre rojo es el icono de la app.</p>
+      <p class="criterion"><b>Supera si</b>la versión oficial es la única que no puedes fechar por su estilo.</p>
+      <div class="verdict" data-test="7"></div>
+    </div>
+    <div class="bench">
+      <div class="tiles three" id="p7-tiles"></div>
+      <p class="readout">Los estilos de 2000–2008 (brillo y bisel) y 2012–2015 (sombra larga) son recreaciones genéricas de cada moda, no versiones históricas de la marca.</p>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 7">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 7</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×1</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>La llama se mantiene desde 1986 y el rojo desde 1989, a lo largo de nueve evoluciones (Banco Santander, 2022).</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd>«Parece actual»: media <span class="dato">pendiente</span>/5.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Restamos un punto: el diseño plano también es una moda y habrá que revisarlo.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 8 PREGNANCIA -->
+  <article class="test" id="c8">
+    <div class="protocol">
+      <div class="step">CRITERIO 8 DE 11</div>
+      <h2>Pregnancia</h2>
+      <p class="def">Fuerza visual que permite recordar el signo tras haberlo visto.</p>
+      <div class="chips"><span class="chip">Reconocimiento entre señuelos</span></div>
+      <p>Verás el símbolo 3 segundos. Después aparecerán cuatro versiones casi iguales: la original y tres alteradas (reflejada, ensanchada y girada). Elige la que viste.</p>
+      <p class="criterion"><b>Supera si</b>eliges la versión correcta a la primera.</p>
+      <div class="verdict" data-test="8"></div>
+    </div>
+    <div class="bench">
+      <div class="split">
+        <div class="col">
+          <div class="controls"><button type="button" class="startbtn" id="p8-start">Empezar: 3 segundos</button></div>
+          <div class="table-light" id="p8-stage"><canvas id="p8-canvas"></canvas><div class="countdown" id="p8-count" aria-live="polite"></div></div>
+        </div>
+        <div class="col">
+          <div class="choices" id="p8-choices" hidden></div>
+          <p class="readout" id="p8-readout" aria-live="polite">Las cuatro opciones aparecerán aquí.</p>
+        </div>
+      </div>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 8">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 8</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×1</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>No aplica: se mide en las personas, no en la guía.</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd>Dibujo de memoria: Santander <span class="dato">pendiente</span>/5 frente a CaixaBank <span class="dato">pendiente</span>/5 · <span class="dato">pendiente</span> % eligió el rojo sin pedírselo · <span class="dato">pendiente</span> % reconoció el original entre los señuelos.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Provisional: sube a 5 si Santander se recuerda mejor que CaixaBank.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 9 VOCATIVIDAD -->
+  <article class="test" id="c9">
+    <div class="protocol">
+      <div class="step">CRITERIO 9 DE 11</div>
+      <h2>Vocatividad</h2>
+      <p class="def">Capacidad del signo para atraer la atención del público.</p>
+      <div class="chips"><span class="chip">Búsqueda visual cronometrada</span></div>
+      <p>La llama está escondida entre decenas de símbolos de marcas ficticias, muchos de ellos en rojos y naranjas e incluso con formas de llama. Pulsa empezar y haz clic en ella lo antes posible. Repite la prueba en grises para ver cuánto aporta el color.</p>
+      <p class="criterion"><b>Supera si</b>la encuentras en menos de 3 segundos en la ronda en color.</p>
+      <div class="verdict" data-test="9"></div>
+    </div>
+    <div class="bench">
+      <div class="controls">
+        <button type="button" class="startbtn" id="p9-color">Ronda en color</button>
+        <button type="button" class="startbtn" id="p9-gray">Ronda en grises</button>
+      </div>
+      <div class="searchgrid" id="p9-grid"></div>
+      <div class="results"><div class="result">Color<b id="p9-r-color">—</b></div><div class="result">Grises<b id="p9-r-gray">—</b></div></div>
+      <p class="readout" id="p9-readout" aria-live="polite">Pulsa una ronda para empezar. El cronómetro arranca cuando aparece la cuadrícula.</p>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 9">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 9</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×1</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>En 2018 el rojo pasó del Pantone 032 al 485, un tono más brillante (Reason Why, 2018).</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd>«Llama la atención»: media <span class="dato">pendiente</span>/5.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>La diferencia entre la ronda en color y la ronda en grises mide cuánto aporta el rojo.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 10 SINGULARIDAD -->
+  <article class="test" id="c10">
+    <div class="protocol">
+      <div class="step">CRITERIO 10 DE 11</div>
+      <h2>Singularidad</h2>
+      <p class="def">Carácter único que lo distingue claramente de la competencia.</p>
+      <div class="chips"><span class="chip">Mapa cromático del sector</span></div>
+      <p>Cada punto es el color dominante de un banco que opera en España, colocado según su tono (ángulo) y su saturación (distancia al centro). Se calcula la distancia de tono entre Santander y su competidor más cercano.</p>
+      <p class="src"><b>Nota</b>Colores de la competencia aproximados a partir de su identidad pública; conviene verificarlos en sus guías de marca.</p>
+      <p class="criterion"><b>Supera si</b>el competidor más próximo está a más de 15° de tono.</p>
+      <div class="verdict" data-test="10"></div>
+    </div>
+    <div class="bench">
+      <div class="split">
+        <div class="col"><div class="wheel" id="p10-wheel"></div></div>
+        <div class="col"><div class="legend" id="p10-legend"></div><p class="readout" id="p10-readout"></p></div>
+      </div>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 10">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 10</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×1</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>Único gran banco español con el rojo como color principal.</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd><span class="dato">pendiente</span> % reconoció la llama sin el nombre, entre símbolos de la competencia.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Los naranjas de ING y Bankinter son la frontera que hay que vigilar.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <!-- 11 DECLINABILIDAD -->
+  <article class="test" id="c11">
+    <div class="protocol">
+      <div class="step">CRITERIO 11 DE 11</div>
+      <h2>Declinabilidad</h2>
+      <p class="def">Capacidad para generar variantes estructuradas para submarcas manteniendo la raíz visual.</p>
+      <div class="chips"><span class="chip">Generador de variantes</span></div>
+      <p>Escribe un descriptor de submarca o activa el cobranding. El generador aplica la regla de la guía: separación de 4 módulos con una línea de 1 pt en el centro. El módulo sale de la retícula de 28 × 28 del símbolo.</p>
+      <p class="src"><b>Fuente</b>Banco Santander (2020), p. 9. La guía básica no publica un sistema de submarcas; esta es una reconstrucción a partir de la regla de cobranding. Tipografía del descriptor: sustituta.</p>
+      <p class="criterion"><b>Supera si</b>todas las variantes conservan la raíz (llama y nombre) reconocible.</p>
+      <div class="verdict" data-test="11"></div>
+    </div>
+    <div class="bench">
+      <div class="split">
+      <div class="col">
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Tipo de variante" data-seg="p11-mode">
+          <button type="button" data-val="sub" aria-pressed="true">Submarca</button>
+          <button type="button" data-val="co" aria-pressed="false">Cobranding</button>
+        </div>
+        <div class="seg" role="group" aria-label="Versión" data-seg="p11-variant">
+          <button type="button" data-val="full" aria-pressed="true">Principal</button>
+          <button type="button" data-val="symbol" aria-pressed="false">Símbolo</button>
+        </div>
+      </div>
+      <label class="label" for="p11-text">Descriptor</label>
+      <input class="textin" id="p11-text" type="text" maxlength="26" value="Private Banking" autocomplete="off">
+      <div class="presets" id="p11-presets">
+        <button type="button">Private Banking</button><button type="button">Consumer Finance</button><button type="button">Empresas</button><button type="button">Seguros</button><button type="button">Universidades</button>
+      </div>
+      <p class="readout" id="p11-readout"></p>
+      </div>
+      <div class="col"><div class="table-light grid-bg" id="p11-stage"><canvas id="p11-canvas"></canvas></div></div>
+      </div>
+    </div>
+    <section class="ficha" aria-label="Ficha de evidencia del criterio 11">
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 11</span><span class="score">Nota del Grupo 7: <b>3/5</b> · peso ×1</span></div>
+      <dl class="ficha-grid">
+        <div><dt>Qué dice la guía</dt><dd>Cobranding con 4 módulos de separación y una línea de 1 pt (p. 9). La guía básica no publica un sistema de submarcas.</dd></div>
+        <div><dt>Qué dicen los participantes</dt><dd>No aplica.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>El signo admite variantes, pero lo puntuamos por lo documentado, no por lo supuesto.</dd></div>
+      </dl>
+    </section>
+  </article>
+
+  <section class="panel doc" id="criticas" aria-labelledby="crit-title">
+    <div class="panel-head"><h2 id="crit-title">Críticas de los expertos y nuestra respuesta</h2></div>
+    <p class="note">Reason Why (2018) recogió siete valoraciones firmadas por ocho expertos: tres positivas y cuatro con críticas o matices. Las incluimos todas.</p>
+    <div class="tablebox"><table>
+      <thead><tr><th>Experto</th><th>Valoración</th><th>Qué dice</th><th>Nuestra respuesta</th></tr></thead>
+      <tbody>
+        <tr><td>Paloma Adrien (Ogilvy &amp; Mather)</td><td>Positiva</td><td>Cambio de fondo hacia lo digital; eficiencia de diseño «impecable»</td><td>Coincide con Suficiencia y Legibilidad</td></tr>
+        <tr><td>Miguel Novillo (El Ruso de Rocky)</td><td>Positiva</td><td>Primer paso necesario; letra sin remates, más moderna y aplicable</td><td>Coincide con Reproducibilidad y Versatilidad</td></tr>
+        <tr><td>Mariam Cuesta y Ed Carrasco (Tango)</td><td>Positiva, con matiz</td><td>Mantiene cercanía y confianza, con «ligeras sensaciones tradicionales»</td><td>Ese poso tradicional refuerza la Pertinencia en banca</td></tr>
+        <tr><td>Félix Carral (Ogilvy &amp; Mather)</td><td>Crítica</td><td>Poco radical y quizá innecesario; lamenta perder la serifa</td><td>Un cambio radical habría destruido 30 años de equidad de marca</td></tr>
+        <tr><td>Nacho Herranz (Tribal Worldwide)</td><td>Matizada</td><td>Duda de que el cambio sea más que estético</td><td>El logo no basta: es uno de nuestros dos riesgos</td></tr>
+        <tr><td>María García Campos (LOLA MullenLowe)</td><td>Matizada</td><td>Necesario, pero llega tarde a lo digital</td><td>Queda fuera del alcance de la identidad visual</td></tr>
+        <tr><td>Fer Rullán (VCCP)</td><td>Matizada</td><td>Poco sorprendente; falta un sistema más dinámico</td><td>Coincide con nuestro 3/5 en Declinabilidad</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="panel doc" id="metodologia" aria-labelledby="met-title">
+    <div class="panel-head"><h2 id="met-title">Metodología y limitaciones</h2></div>
+    <div class="facts">
+      <div><span class="label">Fuentes</span><p>La Guía básica de marca (Banco Santander, 2020), este laboratorio de 11 pruebas y un estudio exploratorio con n = <span class="dato">pendiente</span> participantes.</p></div>
+      <div><span class="label">Control</span><p>CaixaBank, por ser también un imagotipo de la banca española, en la prueba de dibujo de memoria.</p></div>
+      <div><span class="label">Rigor</span><p>Guion literal, orden alterno de los dibujos y dos codificadores independientes (acuerdo <span class="dato">pendiente</span> %).</p></div>
+      <div><span class="label">Límites</span><p>Muestra de conveniencia, no representativa: los datos son indicios. El laboratorio usa una estética neutra para no influir en la evaluación.</p></div>
+      <div><span class="label">Escala</span><p>Nota de 1 a 5 por criterio. Pertinencia, Reproducibilidad, Legibilidad y Versatilidad pesan el doble por ser críticas en banca: máximo 75 puntos.</p></div>
+      <div><span class="label">Formato</span><p>Presentación según la regla 10/20/30 de Kawasaki (2005); este laboratorio actúa como anexo de evidencias.</p></div>
+    </div>
+  </section>
+
+  <footer id="referencias">
+    <h2 class="refs-title">Referencias</h2>
+    <ul class="refs">
+      <li>Banco Santander. (2020). <i>Guía básica</i> [Guía de marca]. <a href="https://www.santander.com/content/dam/santander-com/es/documentos/marca-santander/Guia_Marca_060520_es.pdf" target="_blank" rel="noopener">https://www.santander.com/content/dam/santander-com/es/documentos/marca-santander/Guia_Marca_060520_es.pdf</a></li>
+      <li>Chaves, N. y Belluccia, R. (2003). <i>La marca corporativa: Gestión y diseño de símbolos y logotipos</i>. Paidós.</li>
+      <li>W3C. (2018). <i>Web Content Accessibility Guidelines (WCAG) 2.1</i>. <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener">https://www.w3.org/TR/WCAG21/</a></li>
+    </ul>
+    <p><b>Notas.</b> Las definiciones de los criterios siguen el enunciado de la asignatura, basado en Chaves y Belluccia (2003). Los números de página remiten a la Guía básica (Banco Santander, 2020). El umbral de contraste de 3:1 procede del criterio 1.4.11 de WCAG 2.1. Los colores de la competencia (prueba 10) son aproximados y los estilos de época (prueba 7) son recreaciones genéricas, no versiones históricas de la marca. La tipografía del descriptor (prueba 11) es Nunito, sustituta de las tipografías corporativas, que no son públicas.</p>
+    <p>El logotipo es una marca registrada de Banco Santander, S.A. y se reproduce solo con fines de análisis académico. Laboratorio elaborado por el Grupo 7. Tus veredictos se guardan únicamente en este navegador.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var LOGO_SRC = "data:image/webp;base64,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";
+  var RED = "#ec0000";
+  var STORE = "lab-santander-v2";
+
+  var OURS = [5, 5, 4, 4, 5, 5, 4, 4, 5, 4, 3];
+  var CRIT = ["Pertinencia", "Reproducibilidad", "Legibilidad", "Inteligibilidad", "Suficiencia", "Versatilidad", "Vigencia", "Pregnancia", "Vocatividad", "Singularidad", "Declinabilidad"];
+
+  function $(id) { return document.getElementById(id); }
+  function mk(w, h) { var c = document.createElement("canvas"); c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); return c; }
+  function dpr() { return Math.min(window.devicePixelRatio || 1, 2); }
+  function fmt(n, d) { return n.toFixed(d).replace(".", ","); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ---------- State + verdicts ---------- */
+  var state = { v: {}, attrs: {} };
+  try { var saved = JSON.parse(localStorage.getItem(STORE) || "null"); if (saved && typeof saved === "object") { state.v = saved.v || {}; state.attrs = saved.attrs || {}; } } catch (e) {}
+  function save() { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) {} }
+
+  $("jump").innerHTML = CRIT.map(function (c, i) { return '<li><a href="#c' + (i + 1) + '"><span class="dot" id="dot-' + (i + 1) + '"></span>' + String(i + 1).padStart(2, "0") + " " + c + "</a></li>"; }).join("") +
+    [["contexto", "Contexto"], ["criticas", "Críticas"], ["metodologia", "Metodología"], ["referencias", "Referencias"]].map(function (x) { return '<li><a href="#' + x[0] + '">' + x[1] + "</a></li>"; }).join("");
+
+  function renderScore() {
+    var pass = 0, done = 0, rows = "";
+    CRIT.forEach(function (c, i) {
+      var n = i + 1, v = state.v[n];
+      if (v) done++; if (v === "pass") pass++;
+      var pill = v === "pass" ? '<span class="pill pass">Supera</span>' : v === "fail" ? '<span class="pill fail">No supera</span>' : '<span class="pill">Pendiente</span>';
+      rows += '<tr><td class="num">' + n + '</td><td><a href="#c' + n + '">' + c + "</a></td><td>" + pill + '</td><td class="pg">' + OURS[i] + "/5</td></tr>";
+      var dot = $("dot-" + n); dot.className = "dot" + (v ? " " + v : "");
+    });
+    $("score-body").innerHTML = rows;
+    $("tally").innerHTML = "Revisados <b>" + done + "/11</b> · Superados <b>" + pass + "/11</b>";
+    document.querySelectorAll(".verdict").forEach(function (box) {
+      var n = box.getAttribute("data-test");
+      box.querySelectorAll(".vbtn").forEach(function (b) { b.setAttribute("aria-pressed", String(state.v[n] === b.getAttribute("data-v"))); });
+    });
+  }
+  document.querySelectorAll(".verdict").forEach(function (box) {
+    var n = box.getAttribute("data-test");
+    box.innerHTML = '<span>Tu veredicto:</span><button type="button" class="vbtn" data-v="pass" aria-pressed="false">Supera</button><button type="button" class="vbtn" data-v="fail" aria-pressed="false">No supera</button>';
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest(".vbtn"); if (!b) return;
+      var v = b.getAttribute("data-v");
+      if (state.v[n] === v) delete state.v[n]; else state.v[n] = v;
+      save(); renderScore();
+    });
+  });
+  $("reset").addEventListener("click", function () { state.v = {}; save(); renderScore(); });
+  $("copy").addEventListener("click", function () {
+    var lines = ["Laboratorio de pruebas del signo Santander · resultado", ""];
+    var pass = 0;
+    CRIT.forEach(function (c, i) { var v = state.v[i + 1]; if (v === "pass") pass++; lines.push((i + 1) + ". " + c + ": " + (v === "pass" ? "Supera" : v === "fail" ? "No supera" : "Pendiente")); });
+    lines.push("", "Superados: " + pass + "/11");
+    var text = lines.join("\n");
+    function fallback() { var t = $("copy-fallback"); t.hidden = false; t.value = text; t.focus(); t.select(); $("copy-msg").textContent = "Selecciona y copia el texto."; }
+    try {
+      navigator.clipboard.writeText(text).then(function () { $("copy-msg").textContent = "Resumen copiado."; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  renderScore();
+
+  /* ---------- Segmented controls ---------- */
+  var seg = {};
+  function bindSeg(el, onChange) {
+    var key = el.getAttribute("data-seg");
+    var p = el.querySelector('[aria-pressed="true"]'); seg[key] = p ? p.getAttribute("data-val") : null;
+    el.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      el.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      seg[key] = b.getAttribute("data-val"); onChange();
+    });
+  }
+
+  /* ---------- Logo analysis ---------- */
+  var base = null, cache = new Map();
+  function analyse(img) {
+    var w = img.naturalWidth, h = img.naturalHeight, c = mk(w, h), x = c.getContext("2d");
+    x.drawImage(img, 0, 0);
+    var d = x.getImageData(0, 0, w, h), p = d.data, col = new Uint32Array(w);
+    for (var i = 0, n = 0; i < p.length; i += 4, n++) {
+      var a = p[i + 3] / 255, ink = 1 - Math.min(p[i + 1], p[i + 2]) / 255, m = a * ink;
+      p[i] = p[i + 1] = p[i + 2] = 0; p[i + 3] = Math.round(m * 255);
+      if (m > 0.3) col[n % w]++;
+    }
+    x.putImageData(d, 0, 0);
+    function box(xa, xb) {
+      var y0 = h, y1 = -1, x0 = xb, x1 = xa - 1;
+      for (var y = 0; y < h; y++) for (var xx = xa; xx < xb; xx++) if (p[(y * w + xx) * 4 + 3] > 76) { if (y < y0) y0 = y; if (y > y1) y1 = y; if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; }
+      return { x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1 };
+    }
+    var sx0 = -1, sx1 = -1, gap = 0;
+    for (var cx = 0; cx < w; cx++) { if (col[cx] > 0) { if (sx0 < 0) sx0 = cx; gap = 0; sx1 = cx; } else if (sx0 >= 0) { gap++; if (gap >= 4) break; } }
+    if (sx0 < 0 || sx1 - sx0 > w * 0.4) { sx0 = 0; sx1 = Math.round(w * 0.15); }
+    return { mask: c, box: { full: box(0, w), symbol: box(sx0, sx1 + 1), word: box(sx1 + 2, w) } };
+  }
+  /* Black alpha shape, exactly H px tall. Upscales re-threshold edges to stay crisp. "secondary" = vertical lockup reconstructed. */
+  function getShape(variant, H) {
+    H = Math.max(1, Math.round(H));
+    var key = variant + "|" + H;
+    if (cache.has(key)) return cache.get(key);
+    if (cache.size > 120) cache.clear();
+    var c;
+    if (variant === "secondary") {
+      var hw = Math.max(1, Math.round(H / 3.15)), hs = Math.max(1, Math.round(hw * 1.85));
+      var s = getShape("symbol", hs), wd = getShape("word", hw), W = Math.max(s.width, wd.width);
+      c = mk(W, H); var cx = c.getContext("2d");
+      cx.drawImage(s, Math.round((W - s.width) / 2), 0);
+      cx.drawImage(wd, Math.round((W - wd.width) / 2), H - wd.height);
+    } else {
+      var b = base.box[variant], sc = H / b.h, Wd = Math.max(1, Math.round(b.w * sc));
+      c = mk(Wd, H); var x = c.getContext("2d");
+      x.imageSmoothingEnabled = true; x.imageSmoothingQuality = "high";
+      x.drawImage(base.mask, b.x, b.y, b.w, b.h, 0, 0, Wd, H);
+      if (sc > 1.2) {
+        var d = x.getImageData(0, 0, Wd, H), p = d.data, k = Math.min(sc * 1.1, 7);
+        for (var i = 3; i < p.length; i += 4) { var a = (p[i] / 255 - 0.5) * k + 0.5; p[i] = a < 0 ? 0 : a > 1 ? 255 : Math.round(a * 255); }
+        x.putImageData(d, 0, 0);
+      }
+    }
+    cache.set(key, c); return c;
+  }
+  function aspect(variant) { if (variant === "secondary") { var s = getShape("secondary", 300); return s.width / s.height; } var b = base.box[variant]; return b.w / b.h; }
+  function tint(shape, color) {
+    var c = mk(shape.width, shape.height), x = c.getContext("2d");
+    x.drawImage(shape, 0, 0); x.globalCompositeOperation = "source-in"; x.fillStyle = color; x.fillRect(0, 0, c.width, c.height);
+    return c;
+  }
+  function fitH(variant, maxW, maxH) { return Math.min(maxH, maxW / aspect(variant)); }
+  function fitted(variant, color, maxW, maxH) { return tint(getShape(variant, fitH(variant, maxW, maxH)), color); }
+  function stage(canvas, cssW, cssH) {
+    var r = dpr(); canvas.width = Math.round(cssW * r); canvas.height = Math.round(cssH * r);
+    canvas.style.width = cssW + "px"; canvas.style.height = cssH + "px";
+    return canvas.getContext("2d");
+  }
+  function widthOf(el) { return Math.max(200, Math.floor(el.clientWidth - 2)); }
+  function center(ctx, img, cx, cy) { ctx.drawImage(img, Math.round(cx - img.width / 2), Math.round(cy - img.height / 2)); }
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function roundRect(ctx, x, y, w, h, rad) { ctx.beginPath(); ctx.moveTo(x + rad, y); ctx.arcTo(x + w, y, x + w, y + h, rad); ctx.arcTo(x + w, y + h, x, y + h, rad); ctx.arcTo(x, y + h, x, y, rad); ctx.arcTo(x, y, x + w, y, rad); ctx.closePath(); }
+
+  /* Colour maths */
+  function rgbOf(h) { h = h.replace("#", ""); return [0, 2, 4].map(function (i) { return parseInt(h.substr(i, 2), 16); }); }
+  function lin(c) { c /= 255; return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+  function lum(hex) { var r = rgbOf(hex); return 0.2126 * lin(r[0]) + 0.7152 * lin(r[1]) + 0.0722 * lin(r[2]); }
+  function contrast(a, b) { var la = lum(a), lb = lum(b); return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05); }
+  function grayOf(hex) { var Y = lum(hex), s = Y <= 0.0031308 ? 12.92 * Y : 1.055 * Math.pow(Y, 1 / 2.4) - 0.055, v = Math.round(s * 255).toString(16).padStart(2, "0"); return "#" + v + v + v; }
+  function hsl(hex) {
+    var c = rgbOf(hex).map(function (v) { return v / 255; }), mx = Math.max.apply(null, c), mn = Math.min.apply(null, c), l = (mx + mn) / 2, d = mx - mn, h = 0, s = 0;
+    if (d) { s = d / (1 - Math.abs(2 * l - 1)); if (mx === c[0]) h = ((c[1] - c[2]) / d) % 6; else if (mx === c[1]) h = (c[2] - c[0]) / d + 2; else h = (c[0] - c[1]) / d + 4; h *= 60; if (h < 0) h += 360; }
+    return { h: h, s: s, l: l };
+  }
+
+  /* Decorative effects (used by Suficiencia and Vigencia) */
+  function styled(variant, H, fx, color) {
+    var shape = getShape(variant, H), pad = Math.ceil(H * 0.22), W = shape.width, Hh = shape.height;
+    var c = mk(W + pad * 2, Hh + pad * 2), x = c.getContext("2d");
+    if (fx.outline) { var o = tint(shape, "#1b1b1b"), rr = Math.max(1, H * 0.04); for (var a = 0; a < 16; a++) x.drawImage(o, pad + Math.cos(a / 16 * 6.283) * rr, pad + Math.sin(a / 16 * 6.283) * rr); }
+    var fill;
+    if (fx.gradient) { fill = mk(W, Hh); var fx2 = fill.getContext("2d"), g = fx2.createLinearGradient(0, 0, 0, Hh); g.addColorStop(0, "#ff7a66"); g.addColorStop(1, "#8e0000"); fx2.fillStyle = g; fx2.fillRect(0, 0, W, Hh); fx2.globalCompositeOperation = "destination-in"; fx2.drawImage(shape, 0, 0); }
+    else fill = tint(shape, color);
+    if (fx.shadow) { x.shadowColor = "rgba(0,0,0,.45)"; x.shadowOffsetX = x.shadowOffsetY = Math.max(1, H * 0.05); x.shadowBlur = Math.max(1, H * 0.08); }
+    x.drawImage(fill, pad, pad);
+    x.shadowColor = "transparent"; x.shadowBlur = 0; x.shadowOffsetX = x.shadowOffsetY = 0;
+    if (fx.bevel) {
+      var off = Math.max(1, H * 0.035);
+      [[off, "rgba(255,255,255,.6)"], [-off, "rgba(0,0,0,.4)"]].forEach(function (pair) {
+        var t = mk(W, Hh), tx = t.getContext("2d");
+        tx.drawImage(tint(shape, pair[1]), 0, 0);
+        tx.globalCompositeOperation = "destination-out"; tx.drawImage(shape, pair[0], pair[0]);
+        x.drawImage(t, pad, pad);
+      });
+    }
+    if (fx.gloss) {
+      var gl = mk(W, Hh), gx = gl.getContext("2d"), gg = gx.createLinearGradient(0, 0, 0, Hh * 0.55);
+      gg.addColorStop(0, "rgba(255,255,255,.7)"); gg.addColorStop(1, "rgba(255,255,255,.08)");
+      gx.fillStyle = gg; gx.fillRect(0, 0, W, Hh * 0.5); gx.globalCompositeOperation = "destination-in"; gx.drawImage(shape, 0, 0);
+      x.drawImage(gl, pad, pad);
+    }
+    return c;
+  }
+
+  /* ---------- 1 Pertinencia ---------- */
+  var ATTRS = [
+    ["Luz", "Guía p. 5"], ["Calor", "Guía p. 5"], ["Humanidad", "Guía p. 5"], ["Solidez", "Guía p. 5 · plataforma"],
+    ["Energía", "Guía p. 5 · rojo"], ["Fuerza", "Guía p. 5 · rojo"], ["Valentía", "Guía p. 5 · rojo"], ["Liderazgo", "Guía p. 5 · rojo"],
+    ["Progreso tecnológico", "Guía p. 5"], ["Confianza", "Exigencia del sector"], ["Seriedad", "Exigencia del sector"], ["Cercanía", "Exigencia del sector"]
+  ];
+  function buildP1() {
+    $("p1-attrs").innerHTML = ATTRS.map(function (a, i) {
+      return '<div class="attr"><span class="nm">' + a[0] + "<small>" + a[1] + '</small></span><span class="yn" data-i="' + i + '"><button type="button" data-a="si" aria-pressed="false">Lo percibo</button><button type="button" data-a="no" aria-pressed="false">No</button></span></div>';
+    }).join("");
+    $("p1-attrs").addEventListener("click", function (e) {
+      var b = e.target.closest(".yn button"); if (!b) return;
+      var i = b.parentNode.getAttribute("data-i"), a = b.getAttribute("data-a");
+      if (state.attrs[i] === a) delete state.attrs[i]; else state.attrs[i] = a;
+      save(); syncP1();
+    });
+    syncP1();
+  }
+  function syncP1() {
+    var yes = 0, ans = 0;
+    document.querySelectorAll("#p1-attrs .yn").forEach(function (g) {
+      var i = g.getAttribute("data-i"), a = state.attrs[i]; if (a) ans++; if (a === "si") yes++;
+      g.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(a === b.getAttribute("data-a"))); });
+    });
+    $("p1-readout").innerHTML = "Percibes <b>" + yes + " de 12</b> atributos · respondidos " + ans + "/12" + (ans === 12 ? (yes >= 8 ? " · cumple el umbral de 8" : " · por debajo del umbral de 8") : "");
+  }
+  function renderP1() {
+    var cw = widthOf($("p1-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p1-canvas"), cw, ch);
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw * r, ch * r);
+    center(ctx, fitted("full", RED, cw * r * 0.7, ch * r * 0.42), cw * r / 2, ch * r / 2);
+  }
+
+  /* ---------- 2 Reproducibilidad ---------- */
+  var MODES = [
+    { id: "color", label: "Positivo · Pantone 485 C", fg: RED, bg: "#ffffff", src: "p. 6" },
+    { id: "neg", label: "Negativo sobre rojo", fg: "#ffffff", bg: RED, src: "p. 6" },
+    { id: "bn", label: "Blanco y negro", fg: "#000000", bg: "#ffffff", src: "p. 7" },
+    { id: "bnneg", label: "B/N negativo", fg: "#ffffff", bg: "#000000", src: "p. 7" },
+    { id: "gris", label: "Escala de grises", fg: grayOf(RED), bg: "#ffffff", src: "no prevista en la guía" }
+  ];
+  $("p2-seg").innerHTML = MODES.map(function (m, i) { return '<button type="button" data-val="' + m.id + '" aria-pressed="' + (i === 0) + '">' + m.label + "</button>"; }).join("");
+  function renderP2() {
+    var m = MODES.filter(function (x) { return x.id === seg["p2-mode"]; })[0] || MODES[0];
+    var cw = widthOf($("p2-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p2-canvas"), cw, ch);
+    ctx.fillStyle = m.bg; ctx.fillRect(0, 0, cw * r, ch * r);
+    center(ctx, fitted("full", m.fg, cw * r * 0.72, ch * r * 0.42), cw * r / 2, ch * r / 2);
+    $("p2-readout").innerHTML = "Guía: " + m.src + " · figura " + m.fg.toUpperCase() + " sobre " + m.bg.toUpperCase() + " · contraste <b>" + fmt(contrast(m.fg, m.bg), 1) + ":1</b> (WCAG pide 3:1 para gráficos)";
+  }
+  var copies = null;
+  function buildCopies() {
+    var shape = getShape("full", 110), pad = 12, w = shape.width + pad * 2, h = shape.height + pad * 2;
+    var c = mk(w, h), x = c.getContext("2d"); x.drawImage(shape, pad, pad);
+    var p = x.getImageData(0, 0, w, h).data, a = new Float32Array(w * h);
+    for (var i = 0; i < a.length; i++) a[i] = p[i * 4 + 3] / 255;
+    var gens = [a];
+    for (var g = 1; g <= 10; g++) {
+      var prev = gens[g - 1], next = new Float32Array(w * h), rand = rng(1000 + g * 7919), drift = g % 2 ? 0.04 : -0.03;
+      for (var y = 0; y < h; y++) for (var xx = 0; xx < w; xx++) {
+        var s = 0, n = 0;
+        for (var dy = -1; dy <= 1; dy++) for (var dx = -1; dx <= 1; dx++) { var yy = y + dy, xq = xx + dx; if (yy >= 0 && yy < h && xq >= 0 && xq < w) { s += prev[yy * w + xq]; n++; } }
+        var o = s / n + (rand() - 0.5) * 0.34 > 0.5 + drift ? 1 : 0, q = rand();
+        if (q < 0.0016) o = 1; else if (q > 0.9993) o = 0;
+        next[y * w + xx] = o;
+      }
+      gens.push(next);
+    }
+    copies = { w: w, h: h, gens: gens };
+  }
+  function copyCanvas(g, rgb, alpha) {
+    var G = copies, c = mk(G.w, G.h), x = c.getContext("2d"), im = x.createImageData(G.w, G.h), a = G.gens[g];
+    for (var i = 0; i < a.length; i++) { im.data[i * 4] = rgb[0]; im.data[i * 4 + 1] = rgb[1]; im.data[i * 4 + 2] = rgb[2]; im.data[i * 4 + 3] = Math.round(a[i] * alpha); }
+    x.putImageData(im, 0, 0); return c;
+  }
+  function renderP2b() {
+    var g = +$("p2-gen").value;
+    $("p2-gen-out").textContent = g === 0 ? "0 · original" : g === 1 ? "1 · primera copia" : g + " · copia de la copia";
+    var src = copyCanvas(g, [26, 26, 28], 255), cw = widthOf($("p2b-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p2b-canvas"), cw, ch);
+    ctx.fillStyle = "#f3f1ec"; ctx.fillRect(0, 0, cw * r, ch * r);
+    var s = Math.min(cw * r * 0.86 / src.width, ch * r * 0.8 / src.height);
+    ctx.drawImage(src, (cw * r - src.width * s) / 2, (ch * r - src.height * s) / 2, src.width * s, src.height * s);
+  }
+
+  /* ---------- 3 Legibilidad ---------- */
+  var MIN = { full: 25, secondary: 50, symbol: 16 };
+  var NAME = { full: "versión principal", secondary: "versión secundaria", symbol: "símbolo" };
+  function renderP3() {
+    var v = seg["p3-variant"], h = +$("p3-size").value, min = MIN[v];
+    $("p3-size-out").textContent = h + " px · mínimo " + min + " px";
+    var shape = tint(getShape(v, h), RED), real = $("p3-real");
+    real.width = shape.width; real.height = shape.height; real.style.width = shape.width + "px"; real.style.height = shape.height + "px";
+    real.getContext("2d").drawImage(shape, 0, 0);
+    var st = $("p3-status");
+    if (h >= min) { st.className = "status ok"; st.textContent = "≥ mínimo oficial (" + min + " px)"; } else { st.className = "status ko"; st.textContent = "por debajo del mínimo (" + min + " px)"; }
+    var zoom = $("p3-zoom"), r = dpr(), avail = widthOf(zoom.parentNode.parentNode) - 34;
+    var z = Math.min(avail * r / shape.width, 190 * r / shape.height), pix = z >= 1;
+    if (pix) z = Math.max(1, Math.floor(z));
+    var W = Math.round(shape.width * z), H = Math.round(shape.height * z);
+    zoom.width = W; zoom.height = H; zoom.style.width = (W / r) + "px"; zoom.style.height = (H / r) + "px";
+    var zx = zoom.getContext("2d"); zx.imageSmoothingEnabled = !pix; zx.drawImage(shape, 0, 0, W, H);
+    $("p3-zoom-label").textContent = "Lupa ×" + fmt(z / r, 1) + " · cada cuadro es un píxel real";
+    $("p3-readout").innerHTML = NAME[v] + " · altura <b>" + h + " px</b> · ancho " + shape.width + " px · ≈ " + fmt(h / 96 * 25.4, 1) + " mm en pantalla de 96 ppp";
+    renderP3s(v);
+  }
+  function renderP3s(v) {
+    var cw = widthOf($("p3s-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p3s-canvas"), cw, ch);
+    var W = cw * r, H = ch * r, guide = getComputedStyle(document.documentElement).getPropertyValue("--guide").trim() || "#6b6bf0";
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "#6b6bf0"; ctx.lineWidth = Math.max(1, r);
+    if (v === "symbol") {
+      var G = Math.min(H * 0.86, W * 0.6), m = G / 28, gx = (W - G) / 2, gy = (H - G) / 2;
+      ctx.strokeStyle = "rgba(107,107,240,.18)";
+      for (var i = 0; i <= 28; i++) { ctx.beginPath(); ctx.moveTo(gx + i * m, gy); ctx.lineTo(gx + i * m, gy + G); ctx.stroke(); ctx.beginPath(); ctx.moveTo(gx, gy + i * m); ctx.lineTo(gx + G, gy + i * m); ctx.stroke(); }
+      var sym = fitted("symbol", RED, 18 * m, 17 * m);
+      ctx.drawImage(sym, gx + 5 * m + (18 * m - sym.width) / 2, gy + 5 * m + (17 * m - sym.height) / 2);
+      ctx.strokeStyle = "#6b6bf0"; ctx.setLineDash([6 * r, 4 * r]); ctx.strokeRect(gx, gy, G, G);
+      ctx.setLineDash([]); ctx.strokeRect(gx + 2 * m, gy + 2 * m, 24 * m, 24 * m);
+      label(ctx, "28 × 28 módulos · ideal 5 / 6 · mínimo 3 / 4", W / 2, gy + G + 0, r, H);
+      return;
+    }
+    var asp = aspect(v), symW, lh;
+    lh = Math.min(H / (v === "full" ? 2.6 : 1.9), (W * 0.9) / (asp + (v === "full" ? 2.2 : 1.6) * 0));
+    var tries = 0;
+    while (tries++ < 30) {
+      symW = v === "full" ? base.box.symbol.w * (lh / base.box.full.h) : base.box.symbol.w * (Math.round(Math.round(lh / 3.15) * 1.85) / base.box.symbol.h);
+      if (lh * asp + 2 * symW <= W * 0.94 && lh + 2 * symW <= H * 0.9) break;
+      lh *= 0.92;
+    }
+    var logo = tint(getShape(v, lh), RED), lx = (W - logo.width) / 2, ly = (H - logo.height) / 2;
+    ctx.drawImage(logo, lx, ly);
+    ctx.setLineDash([6 * r, 4 * r]); ctx.strokeRect(lx - symW, ly - symW, logo.width + 2 * symW, logo.height + 2 * symW);
+    ctx.setLineDash([]); ctx.strokeRect(lx - symW / 2, ly - symW / 2, logo.width + symW, logo.height + symW);
+    ctx.fillStyle = "rgba(107,107,240,.12)"; ctx.fillRect(lx, ly - symW, symW, symW);
+  }
+  function label(ctx, t, x, y, r, H) { ctx.fillStyle = "#59626d"; ctx.font = (11 * r) + "px 'IBM Plex Mono', monospace"; ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText(t, x, H - 4 * r); }
+
+  /* ---------- 4 Inteligibilidad ---------- */
+  var p4Timer = null;
+  function p4Blank(msg, showSym) {
+    var cw = widthOf($("p4-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p4-canvas"), cw, ch);
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw * r, ch * r);
+    if (showSym) { center(ctx, fitted("symbol", RED, cw * r * 0.5, ch * r * 0.62), cw * r / 2, ch * r / 2); return; }
+    ctx.fillStyle = "#8a929b"; ctx.font = (14 * r) + "px 'IBM Plex Sans', system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(msg, cw * r / 2, ch * r / 2);
+  }
+  $("p4-start").addEventListener("click", function () {
+    clearInterval(p4Timer); $("p4-quiz").hidden = true; $("p4-reveal").hidden = true; $("p4-q").value = ""; $("p4-start").disabled = true;
+    p4Blank("", true); var left = 5; $("p4-count").textContent = left + " s";
+    p4Timer = setInterval(function () {
+      left--; if (left > 0) { $("p4-count").textContent = left + " s"; return; }
+      clearInterval(p4Timer); p4Timer = null; $("p4-count").textContent = "";
+      p4Blank("Imagen retirada. Responde abajo sin volver a verla."); $("p4-quiz").hidden = false; $("p4-start").disabled = false; $("p4-q").focus();
+    }, 1000);
+  });
+  $("p4-quiz").addEventListener("submit", function (e) {
+    e.preventDefault(); p4Blank("", true);
+    var ans = $("p4-q").value.trim();
+    $("p4-yours").innerHTML = ans ? "<br><br>Tu respuesta: <b>" + esc(ans) + "</b>" : "";
+    $("p4-reveal").hidden = false;
+  });
+
+  /* ---------- 5 Suficiencia ---------- */
+  var fx = {};
+  $("p5-fx").addEventListener("click", function (e) {
+    var b = e.target.closest(".tog"); if (!b) return;
+    var k = b.getAttribute("data-fx"); fx[k] = !fx[k]; b.setAttribute("aria-pressed", String(!!fx[k])); renderP5();
+  });
+  function renderP5() {
+    var blur = +$("p5-blur").value; $("p5-blur-out").textContent = blur + " px";
+    var cw = widthOf($("p5-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), cv = $("p5-canvas"), ctx = stage(cv, cw, ch);
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw * r, ch * r);
+    var lh = fitH("full", cw * r * 0.62, ch * r * 0.36);
+    center(ctx, styled("full", lh, fx, RED), cw * r / 2, ch * r / 2);
+    cv.style.filter = blur ? "blur(" + blur + "px)" : "none";
+    [["p5-small-a", {}], ["p5-small-b", fx]].forEach(function (pair) {
+      var img = styled("full", 24, pair[1], RED), c = $(pair[0]);
+      c.width = img.width; c.height = img.height; c.style.width = img.width + "px"; c.style.height = img.height + "px";
+      var x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, img.width, img.height); x.drawImage(img, 0, 0);
+    });
+    var n = Object.keys(fx).filter(function (k) { return fx[k]; }).length;
+    $("p5-readout").innerHTML = "Inventario del signo oficial: <b>2 elementos</b> (llama y nombre) · <b>1 color</b> plano · 0 efectos. Añadidos ahora: <b>" + n + "</b>.";
+  }
+
+  /* ---------- 6 Versatilidad ---------- */
+  var PALETTE = [
+    { n: "Santander Red", hex: "#EC0000", pms: "485 C", bg: true },
+    { n: "White", hex: "#FFFFFF", pms: "—", bg: true },
+    { n: "Rio", hex: "#F0B998", pms: "6023 C", bg: true },
+    { n: "Lisbon", hex: "#F5DECF", pms: "4031 C", bg: true },
+    { n: "Boston", hex: "#990000", pms: "7622 C", bg: false },
+    { n: "Madrid", hex: "#CC0000", pms: "3620 C", bg: false },
+    { n: "Mexico City", hex: "#EA6F5D", pms: "2030 C", bg: false },
+    { n: "London", hex: "#FBF1EA", pms: "9021 C", bg: false },
+    { n: "Black", hex: "#000000", pms: "—", bg: false }
+  ];
+  var p6sel = 0;
+  $("p6-sw").innerHTML = PALETTE.map(function (p, i) { return '<button type="button" class="swbtn" data-i="' + i + '" aria-pressed="' + (i === 0) + '"><i style="background:' + p.hex + '"></i>' + p.n + (p.bg ? "*" : "") + "<small>" + p.hex + "</small></button>"; }).join("");
+  $("p6-sw").addEventListener("click", function (e) {
+    var b = e.target.closest(".swbtn"); if (!b) return; p6sel = +b.getAttribute("data-i");
+    document.querySelectorAll("#p6-sw .swbtn").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+    renderP6();
+  });
+  function renderP6() {
+    var p = PALETTE[p6sel], fg = lum(p.hex) < 0.3 ? "#FFFFFF" : RED;
+    var cw = widthOf($("p6-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p6-canvas"), cw, ch);
+    ctx.fillStyle = p.hex; ctx.fillRect(0, 0, cw * r, ch * r);
+    center(ctx, fitted("full", fg, cw * r * 0.7, ch * r * 0.4), cw * r / 2, ch * r / 2);
+    $("p6-readout").innerHTML = "Fondo <b>" + p.n + "</b> (Pantone " + p.pms + ") · versión " + (fg === RED ? "positiva" : "negativa") + " · contraste <b>" + fmt(contrast(fg, p.hex), 1) + ":1</b> · " +
+      (p.bg ? '<span class="status ok">fondo permitido (p. 12)</span>' : '<span class="status ko">no previsto como fondo (p. 12)</span>');
+  }
+  var TILES = [
+    { id: "app", cap: "Icono de aplicación", sub: "Símbolo en negativo · p. 6" },
+    { id: "tab", cap: "Pestaña del navegador", sub: "Símbolo a 16 px · mínimo oficial" },
+    { id: "fachada", cap: "Rótulo de fachada", sub: "Versión principal en negativo" },
+    { id: "foto", cap: "Sobre fotografía", sub: "Versión principal en blanco" },
+    { id: "relieve", cap: "Relieve o bordado", sub: "Sin color, solo volumen" },
+    { id: "sello", cap: "Sello de caucho", sub: "Una tinta, impresión irregular" }
+  ];
+  $("p6-tiles").innerHTML = TILES.map(function (t) { return '<figure class="tile"><canvas id="t6-' + t.id + '"></canvas><figcaption><b>' + t.cap + "</b>" + t.sub + "</figcaption></figure>"; }).join("");
+  function renderP6tiles() {
+    var cw = Math.max(170, Math.floor($("t6-app").parentNode.clientWidth)), ch = Math.round(cw * 0.62), r = dpr(), W = cw * r, H = ch * r;
+    TILES.forEach(function (t) {
+      var ctx = stage($("t6-" + t.id), cw, ch);
+      if (t.id === "app") {
+        var g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, "#3b4a5c"); g.addColorStop(1, "#1d2530"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+        var s = H * 0.5; ctx.fillStyle = RED; roundRect(ctx, (W - s) / 2, (H - s) / 2 - H * 0.05, s, s, s * 0.22); ctx.fill();
+        center(ctx, fitted("symbol", "#fff", s * 0.6, s * 0.6), W / 2, H / 2 - H * 0.05);
+        ctx.fillStyle = "#e8ebee"; ctx.font = (11 * r) + "px system-ui, sans-serif"; ctx.textAlign = "center"; ctx.fillText("Banca", W / 2, H / 2 + s / 2 + 10 * r);
+      } else if (t.id === "tab") {
+        ctx.fillStyle = "#dfe3e8"; ctx.fillRect(0, 0, W, H);
+        var tabH = 34 * r, ty = H * 0.3; ctx.fillStyle = "#fff"; roundRect(ctx, 14 * r, ty, W * 0.66, tabH + 10 * r, 8 * r); ctx.fill(); ctx.fillRect(0, ty + tabH, W, H);
+        var fav = tint(getShape("symbol", 16 * r), RED); ctx.drawImage(fav, 26 * r, ty + (tabH - fav.height) / 2);
+        ctx.fillStyle = "#2a2f36"; ctx.font = (12 * r) + "px system-ui, sans-serif"; ctx.textBaseline = "middle"; ctx.fillText("Inicio · Banca online", 26 * r + fav.width + 8 * r, ty + tabH / 2);
+        ctx.fillStyle = "#eef0f3"; ctx.fillRect(14 * r, ty + tabH + 16 * r, W - 28 * r, 10 * r); ctx.fillRect(14 * r, ty + tabH + 34 * r, W * 0.5, 10 * r);
+      } else if (t.id === "fachada") {
+        var gw = ctx.createLinearGradient(0, 0, 0, H); gw.addColorStop(0, "#cfc9bf"); gw.addColorStop(1, "#b7b0a5"); ctx.fillStyle = gw; ctx.fillRect(0, 0, W, H);
+        ctx.strokeStyle = "rgba(0,0,0,.08)"; ctx.lineWidth = r; for (var yy = 0; yy < H; yy += 18 * r) { ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(W, yy); ctx.stroke(); }
+        var bh = H * 0.34; ctx.fillStyle = RED; ctx.fillRect(0, H * 0.18, W, bh);
+        center(ctx, fitted("full", "#fff", W * 0.66, bh * 0.5), W / 2, H * 0.18 + bh / 2);
+        ctx.fillStyle = "#3a3f46"; ctx.fillRect(W * 0.12, H * 0.62, W * 0.3, H * 0.38); ctx.fillRect(W * 0.58, H * 0.62, W * 0.3, H * 0.38);
+      } else if (t.id === "foto") {
+        var gf = ctx.createRadialGradient(W * 0.3, H * 0.2, 10, W * 0.5, H * 0.6, W * 0.8); gf.addColorStop(0, "#6c7f8f"); gf.addColorStop(0.5, "#2f3d4a"); gf.addColorStop(1, "#141a20"); ctx.fillStyle = gf; ctx.fillRect(0, 0, W, H);
+        var rf = rng(7); ctx.fillStyle = "rgba(255,255,255,.05)"; for (var k = 0; k < 40; k++) { ctx.beginPath(); ctx.arc(rf() * W, rf() * H, (4 + rf() * 30) * r, 0, 6.283); ctx.fill(); }
+        center(ctx, fitted("full", "#fff", W * 0.66, H * 0.2), W / 2, H * 0.72);
+      } else if (t.id === "relieve") {
+        ctx.fillStyle = "#8d9196"; ctx.fillRect(0, 0, W, H);
+        var rt = rng(3); for (var j = 0; j < 2600; j++) { ctx.fillStyle = rt() > 0.5 ? "rgba(255,255,255,.05)" : "rgba(0,0,0,.05)"; ctx.fillRect(rt() * W, rt() * H, 2 * r, 2 * r); }
+        var sh = getShape("symbol", H * 0.58), dx = (W - sh.width) / 2, dy = (H - sh.height) / 2, o = 2 * r;
+        ctx.drawImage(tint(sh, "rgba(255,255,255,.55)"), dx - o, dy - o); ctx.drawImage(tint(sh, "rgba(0,0,0,.45)"), dx + o, dy + o); ctx.drawImage(tint(sh, "#8d9196"), dx, dy);
+      } else if (t.id === "sello") {
+        ctx.fillStyle = "#f4f1ea"; ctx.fillRect(0, 0, W, H);
+        var src = copyCanvas(2, [196, 24, 30], 215), sc = Math.min(W * 0.78 / src.width, H * 0.5 / src.height);
+        ctx.save(); ctx.translate(W / 2, H / 2); ctx.rotate(-0.06);
+        ctx.strokeStyle = "rgba(196,24,30,.8)"; ctx.lineWidth = 3 * r; roundRect(ctx, -src.width * sc / 2 - 10 * r, -src.height * sc / 2 - 10 * r, src.width * sc + 20 * r, src.height * sc + 20 * r, 6 * r); ctx.stroke();
+        ctx.drawImage(src, -src.width * sc / 2, -src.height * sc / 2, src.width * sc, src.height * sc); ctx.restore();
+      }
+    });
+  }
+
+  /* ---------- 7 Vigencia ---------- */
+  var ERAS = [
+    { id: "y2k", cap: "Moda 2000–2008", sub: "Brillo, bisel y volumen" },
+    { id: "long", cap: "Moda 2012–2015", sub: "Plano con sombra larga" },
+    { id: "flat", cap: "Versión oficial", sub: "Símbolo plano sobre Santander Red" }
+  ];
+  $("p7-tiles").innerHTML = ERAS.map(function (e) { return '<figure class="tile"><canvas id="t7-' + e.id + '"></canvas><figcaption><b>' + e.cap + "</b>" + e.sub + "</figcaption></figure>"; }).join("");
+  function renderP7() {
+    var cw = Math.max(150, Math.floor($("t7-y2k").parentNode.clientWidth)), ch = cw, r = dpr(), W = cw * r, H = ch * r;
+    ERAS.forEach(function (e) {
+      var ctx = stage($("t7-" + e.id), cw, ch);
+      ctx.fillStyle = "#eef0f3"; ctx.fillRect(0, 0, W, H);
+      var s = W * 0.62, x0 = (W - s) / 2, y0 = (H - s) / 2, rad = s * 0.22;
+      ctx.save(); roundRect(ctx, x0, y0, s, s, rad); ctx.clip();
+      if (e.id === "y2k") {
+        var g = ctx.createLinearGradient(0, y0, 0, y0 + s); g.addColorStop(0, "#ff5a4a"); g.addColorStop(1, "#9c0000"); ctx.fillStyle = g; ctx.fillRect(x0, y0, s, s);
+        var sym = styled("symbol", s * 0.5, { shadow: true, bevel: true }, "#ffffff"); center(ctx, sym, W / 2, H / 2 + s * 0.02);
+        var gl = ctx.createLinearGradient(0, y0, 0, y0 + s * 0.5); gl.addColorStop(0, "rgba(255,255,255,.65)"); gl.addColorStop(1, "rgba(255,255,255,.05)");
+        ctx.fillStyle = gl; ctx.beginPath(); ctx.ellipse(W / 2, y0, s * 0.62, s * 0.5, 0, 0, Math.PI); ctx.fill();
+      } else if (e.id === "long") {
+        ctx.fillStyle = "#e33b2e"; ctx.fillRect(x0, y0, s, s);
+        var shp = getShape("symbol", s * 0.46), dk = tint(shp, "#b3261b"), sx = (W - shp.width) / 2, sy = (H - shp.height) / 2;
+        for (var i = s * 0.6; i > 0; i -= Math.max(1, r)) ctx.drawImage(dk, sx + i, sy + i);
+        ctx.drawImage(tint(shp, "#ffffff"), sx, sy);
+      } else {
+        ctx.fillStyle = RED; ctx.fillRect(x0, y0, s, s);
+        center(ctx, fitted("symbol", "#ffffff", s * 0.6, s * 0.6), W / 2, H / 2);
+      }
+      ctx.restore();
+      if (e.id === "y2k") { ctx.strokeStyle = "rgba(0,0,0,.25)"; ctx.lineWidth = r; roundRect(ctx, x0, y0, s, s, rad); ctx.stroke(); }
+    });
+  }
+
+  /* ---------- 8 Pregnancia ---------- */
+  var p8Timer = null;
+  var VARIANTS = [
+    { id: "ok", t: function (ctx, img) { ctx.drawImage(img, -img.width / 2, -img.height / 2); } },
+    { id: "mirror", t: function (ctx, img) { ctx.scale(-1, 1); ctx.drawImage(img, -img.width / 2, -img.height / 2); } },
+    { id: "wide", t: function (ctx, img) { ctx.scale(1.22, 0.92); ctx.drawImage(img, -img.width / 2, -img.height / 2); } },
+    { id: "rot", t: function (ctx, img) { ctx.rotate(-0.21); ctx.drawImage(img, -img.width / 2, -img.height / 2); } }
+  ];
+  function p8Stage(show, msg) {
+    var cw = widthOf($("p8-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p8-canvas"), cw, ch);
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw * r, ch * r);
+    if (show) { center(ctx, fitted("symbol", RED, cw * r * 0.5, ch * r * 0.62), cw * r / 2, ch * r / 2); return; }
+    ctx.fillStyle = "#8a929b"; ctx.font = (14 * r) + "px 'IBM Plex Sans', system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(msg, cw * r / 2, ch * r / 2);
+  }
+  function p8Choices() {
+    var box = $("p8-choices"), order = VARIANTS.slice(), rnd = Math.random;
+    for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)); var t = order[i]; order[i] = order[j]; order[j] = t; }
+    box.innerHTML = order.map(function (v, i) { return '<button type="button" class="choice" data-id="' + v.id + '" aria-label="Opción ' + (i + 1) + '"><canvas></canvas></button>'; }).join("");
+    box.hidden = false;
+    var cw = Math.max(110, Math.floor(box.firstChild.clientWidth - 4)), r = dpr();
+    box.querySelectorAll(".choice").forEach(function (b) {
+      var v = VARIANTS.filter(function (x) { return x.id === b.getAttribute("data-id"); })[0];
+      var ctx = stage(b.querySelector("canvas"), cw, cw); b.querySelector("canvas").style.width = "100%"; b.querySelector("canvas").style.height = "auto";
+      ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw * r, cw * r);
+      var img = fitted("symbol", RED, cw * r * 0.5, cw * r * 0.5);
+      ctx.save(); ctx.translate(cw * r / 2, cw * r / 2); v.t(ctx, img); ctx.restore();
+    });
+  }
+  $("p8-start").addEventListener("click", function () {
+    clearInterval(p8Timer); $("p8-choices").hidden = true; $("p8-readout").textContent = ""; $("p8-start").disabled = true;
+    p8Stage(true); var left = 3; $("p8-count").textContent = left + " s";
+    p8Timer = setInterval(function () {
+      left--; if (left > 0) { $("p8-count").textContent = left + " s"; return; }
+      clearInterval(p8Timer); p8Timer = null; $("p8-count").textContent = "";
+      p8Stage(false, "¿Cuál de estas cuatro viste?"); p8Choices(); $("p8-start").disabled = false;
+    }, 1000);
+  });
+  $("p8-choices").addEventListener("click", function (e) {
+    var b = e.target.closest(".choice"); if (!b || b.disabled) return;
+    var ok = b.getAttribute("data-id") === "ok", names = { mirror: "reflejada", wide: "ensanchada", rot: "girada" };
+    document.querySelectorAll("#p8-choices .choice").forEach(function (x) { x.disabled = true; if (x.getAttribute("data-id") === "ok") x.classList.add("right"); });
+    if (!ok) b.classList.add("wrong");
+    $("p8-readout").innerHTML = ok ? "<b>Correcto.</b> Has elegido la versión original a la primera." : "Has elegido la versión <b>" + names[b.getAttribute("data-id")] + "</b>. La original está marcada en verde.";
+  });
+
+  /* ---------- 9 Vocatividad ---------- */
+  var p9 = { t0: 0, round: null, target: -1, misses: 0 };
+  /* Fictitious brand marks: ~40% in reds and oranges so colour alone is not a giveaway */
+  var DCOL = ["#e30613", "#c8102e", "#f04e23", "#ff7300", "#d4145a", "#e4002b", "#1d4f91", "#0072ce", "#00a3e0", "#2f855a", "#009639", "#6b4fa0", "#5b6770", "#0f766e", "#f2a900"];
+  function drawMark(ctx, kind, color, S, rand) {
+    var c = S / 2, q = S * 0.32, k;
+    ctx.save(); ctx.fillStyle = color; ctx.strokeStyle = color; ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.translate(c, c); ctx.rotate((rand() - 0.5) * 0.5); ctx.translate(-c, -c);
+    ctx.beginPath();
+    switch (kind) {
+      case 0: /* drop */
+        ctx.moveTo(c, c - q * 1.1); ctx.bezierCurveTo(c + q * 1.1, c, c + q * 0.8, c + q, c, c + q); ctx.bezierCurveTo(c - q * 0.8, c + q, c - q * 1.1, c, c, c - q * 1.1); ctx.fill(); break;
+      case 1: /* leaf */
+        ctx.ellipse(c, c, q, q * 0.5, -0.8, 0, 6.283); ctx.fill(); break;
+      case 2: /* waves */
+        ctx.lineWidth = S * 0.09; for (k = -1; k <= 1; k++) { ctx.moveTo(c - q, c + k * q * 0.6); ctx.quadraticCurveTo(c - q / 2, c + k * q * 0.6 - q * 0.35, c, c + k * q * 0.6); ctx.quadraticCurveTo(c + q / 2, c + k * q * 0.6 + q * 0.35, c + q, c + k * q * 0.6); } ctx.stroke(); break;
+      case 3: /* star */
+        for (k = 0; k < 10; k++) { var rr = k % 2 ? q * 0.45 : q * 1.05, a = -Math.PI / 2 + k * Math.PI / 5; ctx.lineTo(c + Math.cos(a) * rr, c + Math.sin(a) * rr); } ctx.closePath(); ctx.fill(); break;
+      case 4: /* crescent */
+        ctx.arc(c, c, q, 0, 6.283); ctx.moveTo(c + q * 1.25, c - q * 0.2); ctx.arc(c + q * 0.45, c - q * 0.2, q * 0.8, 0, 6.283, true); ctx.fill("evenodd"); break;
+      case 5: /* hexagon with hole */
+        for (k = 0; k < 6; k++) { var ah = Math.PI / 6 + k * Math.PI / 3; ctx.lineTo(c + Math.cos(ah) * q, c + Math.sin(ah) * q); } ctx.closePath(); ctx.moveTo(c + q * 0.4, c); ctx.arc(c, c, q * 0.4, 0, 6.283, true); ctx.fill("evenodd"); break;
+      case 6: /* linked rings */
+        ctx.lineWidth = S * 0.08; ctx.arc(c - q * 0.35, c, q * 0.6, 0, 6.283); ctx.moveTo(c + q * 0.95, c); ctx.arc(c + q * 0.35, c, q * 0.6, 0, 6.283); ctx.stroke(); break;
+      case 7: /* chevron stack */
+        ctx.lineWidth = S * 0.1; ctx.moveTo(c - q, c - q * 0.5); ctx.lineTo(c, c + q * 0.1); ctx.lineTo(c + q, c - q * 0.5); ctx.moveTo(c - q, c + q * 0.1); ctx.lineTo(c, c + q * 0.7); ctx.lineTo(c + q, c + q * 0.1); ctx.stroke(); break;
+      case 8: /* ribbon S */
+        ctx.lineWidth = S * 0.1; ctx.arc(c, c - q * 0.45, q * 0.5, Math.PI * 0.1, Math.PI * 1.5, true); ctx.moveTo(c + q * 0.5 * Math.cos(Math.PI * 0.9), c + q * 0.45); ctx.arc(c, c + q * 0.45, q * 0.5, Math.PI * 1.1, Math.PI * 0.5, true); ctx.stroke(); break;
+      case 9: /* quartered diamond */
+        var g = q * 0.08; [[0, -1], [1, 0], [0, 1], [-1, 0]].forEach(function (d) { ctx.moveTo(c + d[0] * g, c + d[1] * g - q * 0.0); }); ctx.closePath();
+        ctx.translate(c, c); ctx.rotate(Math.PI / 4); ctx.beginPath(); var h = q * 0.68; ctx.rect(-h, -h, h - g, h - g); ctx.rect(g, -h, h - g, h - g); ctx.rect(-h, g, h - g, h - g); ctx.rect(g, g, h - g, h - g); ctx.fill(); break;
+      case 10: /* sunburst */
+        ctx.arc(c, c, q * 0.42, 0, 6.283); ctx.fill(); ctx.beginPath(); ctx.lineWidth = S * 0.06; for (k = 0; k < 8; k++) { var as = k * Math.PI / 4; ctx.moveTo(c + Math.cos(as) * q * 0.62, c + Math.sin(as) * q * 0.62); ctx.lineTo(c + Math.cos(as) * q * 1.02, c + Math.sin(as) * q * 1.02); } ctx.stroke(); break;
+      default: /* flame-like tongue over an oval base: the hardest decoy */
+        ctx.ellipse(c, c + q * 0.55, q * 0.95, q * 0.42, 0, 0, 6.283); ctx.fill(); ctx.beginPath();
+        ctx.moveTo(c - q * 0.15, c + q * 0.25); ctx.bezierCurveTo(c - q * 0.6, c - q * 0.2, c + q * 0.1, c - q * 0.6, c + q * 0.1, c - q * 1.05); ctx.bezierCurveTo(c + q * 0.55, c - q * 0.4, c + q * 0.35, c, c + q * 0.25, c + q * 0.25); ctx.closePath(); ctx.fill(); break;
+    }
+    ctx.restore();
+  }
+  function startP9(round) {
+    var grid = $("p9-grid"), wide = grid.clientWidth >= 640, cols = wide ? 12 : 6, rows = wide ? 6 : 8, n = cols * rows;
+    grid.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
+    var rand = Math.random; p9.target = Math.floor(rand() * n); p9.round = round; p9.misses = 0;
+    var html = ""; for (var i = 0; i < n; i++) html += '<button type="button" class="cell" data-i="' + i + '" aria-label="Celda ' + (i + 1) + '"><canvas></canvas></button>';
+    grid.innerHTML = html;
+    var S = Math.max(24, Math.floor((grid.clientWidth - 16 - (cols - 1) * 4) / cols)), r = dpr();
+    grid.querySelectorAll(".cell canvas").forEach(function (cv, i) {
+      var ctx = stage(cv, S, S);
+      if (i === p9.target) {
+        center(ctx, fitted("symbol", round === "gray" ? grayOf(RED) : RED, S * r * 0.6, S * r * 0.6), S * r / 2, S * r / 2);
+      } else {
+        ctx.scale(r, r);
+        var col = DCOL[Math.floor(rand() * DCOL.length)];
+        drawMark(ctx, Math.floor(rand() * 12), round === "gray" ? grayOf(col) : col, S, rand);
+      }
+    });
+    $("p9-readout").textContent = "Busca la llama de Santander y haz clic en ella.";
+    p9.t0 = performance.now();
+  }
+  $("p9-color").addEventListener("click", function () { startP9("color"); });
+  $("p9-gray").addEventListener("click", function () { startP9("gray"); });
+  $("p9-grid").addEventListener("click", function (e) {
+    var b = e.target.closest(".cell"); if (!b || p9.round === null) return;
+    if (+b.getAttribute("data-i") === p9.target) {
+      var t = (performance.now() - p9.t0) / 1000;
+      $(p9.round === "gray" ? "p9-r-gray" : "p9-r-color").textContent = fmt(t, 2) + " s";
+      $("p9-readout").innerHTML = "Encontrado en <b>" + fmt(t, 2) + " s</b>" + (p9.misses ? " con " + p9.misses + " clic" + (p9.misses > 1 ? "s" : "") + " erróneo" + (p9.misses > 1 ? "s" : "") : " sin errores") + (p9.round === "color" ? (t < 3 ? " · por debajo del umbral de 3 s." : " · por encima del umbral de 3 s.") : ".");
+      b.style.outline = "2px solid var(--pass)"; p9.round = null;
+    } else { p9.misses++; b.classList.add("miss"); }
+  });
+  function idleP9() {
+    var grid = $("p9-grid"); if (grid.childElementCount) return;
+    grid.style.gridTemplateColumns = "1fr";
+    grid.innerHTML = '<p class="readout" style="padding:28px;text-align:center">La cuadrícula aparecerá aquí.</p>';
+  }
+
+  /* ---------- 10 Singularidad ---------- */
+  var BANKS = [
+    { n: "Santander", hex: "#EC0000", me: true },
+    { n: "BBVA", hex: "#072146" }, { n: "CaixaBank", hex: "#007EAE" }, { n: "Banco Sabadell", hex: "#006DFF" },
+    { n: "Bankinter", hex: "#FF7300" }, { n: "ING", hex: "#FF6200" }, { n: "Unicaja", hex: "#00843D" }, { n: "Abanca", hex: "#2D5BA8" }
+  ];
+  function renderP10() {
+    var S = 440, c = S / 2, R0 = 40, R1 = 180, html = '<svg viewBox="0 0 ' + S + " " + S + '" role="img" aria-label="Mapa de tono y saturación de los colores dominantes de bancos en España">';
+    [R0, (R0 + R1) / 2, R1].forEach(function (rr) { html += '<circle class="ax" cx="' + c + '" cy="' + c + '" r="' + rr + '"/>'; });
+    for (var a = 0; a < 360; a += 30) {
+      var rad = (a - 90) * Math.PI / 180, x1 = c + Math.cos(rad) * R0, y1 = c + Math.sin(rad) * R0, x2 = c + Math.cos(rad) * R1, y2 = c + Math.sin(rad) * R1;
+      html += '<line class="ax" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '"/>';
+      html += '<text class="axt" text-anchor="middle" dominant-baseline="middle" x="' + (c + Math.cos(rad) * (R1 + 16)) + '" y="' + (c + Math.sin(rad) * (R1 + 16)) + '">' + a + "°</text>";
+    }
+    var meH = hsl("#EC0000").h, a1 = (meH - 15 - 90) * Math.PI / 180, a2 = (meH + 15 - 90) * Math.PI / 180;
+    html += '<path d="M' + (c + Math.cos(a1) * R0) + " " + (c + Math.sin(a1) * R0) + " L" + (c + Math.cos(a1) * R1) + " " + (c + Math.sin(a1) * R1) + " A" + R1 + " " + R1 + " 0 0 1 " + (c + Math.cos(a2) * R1) + " " + (c + Math.sin(a2) * R1) + " L" + (c + Math.cos(a2) * R0) + " " + (c + Math.sin(a2) * R0) + " A" + R0 + " " + R0 + ' 0 0 0 ' + (c + Math.cos(a1) * R0) + " " + (c + Math.sin(a1) * R0) + 'Z" fill="rgba(236,0,0,.08)" stroke="rgba(236,0,0,.4)" stroke-dasharray="4 3"/>';
+    var nearest = null, placed = [];
+    BANKS.forEach(function (b) {
+      var k = hsl(b.hex); b.h = k.h; b.s = k.s;
+      if (!b.me) { var d = Math.abs(((b.h - meH + 540) % 360) - 180); b.d = d; if (!nearest || d < nearest.d) nearest = b; }
+    });
+    BANKS.slice().sort(function (a, b) { return (a.me ? 1 : 0) - (b.me ? 1 : 0); }).forEach(function (b) {
+      var rad = (b.h - 90) * Math.PI / 180, rr = R0 + b.s * (R1 - R0) * 0.9, x = c + Math.cos(rad) * rr, y = c + Math.sin(rad) * rr;
+      html += '<circle cx="' + x + '" cy="' + y + '" r="' + (b.me ? 11 : 8) + '" fill="' + b.hex + '" stroke="' + (b.me ? "#000" : "#fff") + '" stroke-width="' + (b.me ? 2 : 1.5) + '"><title>' + b.n + " · " + b.hex + " · " + Math.round(b.h) + "°</title></circle>";
+      var lx = x + (Math.cos(rad) >= 0 ? 13 : -13), anchor = Math.cos(rad) >= 0 ? "start" : "end", ly = y + 4;
+      for (var guard = 0; guard < 10 && placed.some(function (p) { return p[2] === anchor && Math.abs(p[1] - ly) < 13 && Math.abs(p[0] - lx) < 110; }); guard++) ly += 13;
+      placed.push([lx, ly, anchor]);
+      html += '<text class="lbl" x="' + lx + '" y="' + ly + '" text-anchor="' + anchor + '"' + (b.me ? ' font-weight="700"' : "") + ">" + b.n + "</text>";
+    });
+    html += '<text class="axt" x="' + c + '" y="' + (c + 4) + '" text-anchor="middle">tono</text></svg>';
+    $("p10-wheel").innerHTML = html;
+    $("p10-legend").innerHTML = BANKS.map(function (b) { return '<div><i class="swatch" style="background:' + b.hex + '"></i>' + b.n + " <span>" + b.hex + " · " + Math.round(b.h) + "°</span></div>"; }).join("");
+    $("p10-readout").innerHTML = "Zona sombreada: ±15° alrededor del rojo Santander (" + Math.round(meH) + "°). Competidor más próximo: <b>" + nearest.n + "</b>, a <b>" + Math.round(nearest.d) + "°</b> de tono" + (nearest.d > 15 ? " · fuera de la zona." : " · dentro de la zona.");
+  }
+
+  /* ---------- 11 Declinabilidad ---------- */
+  function renderP11() {
+    var mode = seg["p11-mode"], v = seg["p11-variant"], text = ($("p11-text").value || "").trim() || "Descriptor";
+    var cw = widthOf($("p11-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p11-canvas"), cw, ch), W = cw * r, H = ch * r;
+    ctx.fillStyle = "rgba(255,255,255,.88)"; ctx.fillRect(0, 0, W, H);
+    var lh = H * (v === "full" ? 0.24 : 0.34), logo, symW, m, partW, total, tries = 0, fs;
+    var font = function (px) { return "700 " + px + "px Nunito, 'IBM Plex Sans', sans-serif"; };
+    do {
+      logo = tint(getShape(v, lh), RED);
+      symW = base.box.symbol.w * (lh / (v === "full" ? base.box.full.h : base.box.symbol.h));
+      m = symW / 18;
+      fs = lh * (v === "full" ? 0.62 : 0.42);
+      ctx.font = font(fs);
+      partW = mode === "co" ? lh * (v === "full" ? 3.2 : 2.4) : ctx.measureText(text).width;
+      total = logo.width + 4 * m + partW;
+      if (total <= W * 0.9) break; lh *= 0.92;
+    } while (tries++ < 40);
+    var x0 = (W - total) / 2, cy = H / 2;
+    ctx.drawImage(logo, x0, cy - logo.height / 2);
+    var lx = x0 + logo.width + 2 * m;
+    ctx.strokeStyle = "#8a9099"; ctx.lineWidth = Math.max(1, r * 1.33);
+    ctx.beginPath(); ctx.moveTo(Math.round(lx) + 0.5, cy - logo.height * 0.55); ctx.lineTo(Math.round(lx) + 0.5, cy + logo.height * 0.55); ctx.stroke();
+    var px = x0 + logo.width + 4 * m;
+    if (mode === "co") {
+      ctx.fillStyle = "#d9dde2"; roundRect(ctx, px, cy - logo.height / 2, partW, logo.height, logo.height * 0.18); ctx.fill();
+      ctx.fillStyle = "#59626d"; ctx.font = (Math.max(10, logo.height * 0.26)) + "px 'IBM Plex Mono', monospace"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText("Marca socia", px + partW / 2, cy);
+    } else {
+      ctx.fillStyle = "#3d4249"; ctx.font = font(fs); ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText(text, px, cy + fs * 0.04);
+    }
+    ctx.fillStyle = "rgba(107,107,240,.16)"; ctx.fillRect(x0 + logo.width, cy + logo.height * 0.62, 4 * m, Math.max(2, 3 * r));
+    $("p11-readout").innerHTML = "Módulo = ancho del símbolo / 18 (retícula de 28 con 5 + 5 de margen) · separación <b>4 módulos</b> · línea de <b>1 pt</b> en el centro · la franja violeta marca los 4 módulos.";
+  }
+  $("p11-text").addEventListener("input", function () { renderP11(); });
+  $("p11-presets").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; $("p11-text").value = b.textContent; renderP11(); });
+
+  /* ---------- Wiring ---------- */
+  function renderAll() {
+    renderP1(); renderP2(); renderP2b(); renderP3();
+    if (!p4Timer && $("p4-reveal").hidden) p4Blank("Pulsa «Empezar» cuando estés listo");
+    renderP5(); renderP6(); renderP6tiles(); renderP7();
+    if (!p8Timer && $("p8-choices").hidden) p8Stage(false, "Pulsa «Empezar» cuando estés listo");
+    idleP9(); renderP10(); renderP11();
+  }
+  function init(img) {
+    base = analyse(img); buildCopies(); buildP1();
+    bindSeg($("p2-seg"), renderP2);
+    bindSeg(document.querySelector('[data-seg="p3-variant"]'), function () { $("p3-size").value = MIN[seg["p3-variant"]]; renderP3(); });
+    bindSeg(document.querySelector('[data-seg="p11-mode"]'), renderP11);
+    bindSeg(document.querySelector('[data-seg="p11-variant"]'), renderP11);
+    $("p2-gen").addEventListener("input", renderP2b);
+    $("p3-size").addEventListener("input", renderP3);
+    $("p3-min").addEventListener("click", function () { $("p3-size").value = MIN[seg["p3-variant"]]; renderP3(); });
+    document.querySelectorAll("#c3 [data-size]").forEach(function (b) { b.addEventListener("click", function () { $("p3-size").value = b.getAttribute("data-size"); renderP3(); }); });
+    $("p5-blur").addEventListener("input", renderP5);
+    renderAll();
+    if (location.hash && /^#[a-z0-9-]+$/i.test(location.hash)) { var tgt = document.getElementById(location.hash.slice(1)); if (tgt) { var go = function () { tgt.scrollIntoView({ behavior: "instant", block: "start" }); }; setTimeout(go, 60); setTimeout(go, 450); if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setTimeout(go, 50); }); } }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderP11);
+    var lastW = window.innerWidth, pending = null;
+    window.addEventListener("resize", function () { if (window.innerWidth === lastW) return; lastW = window.innerWidth; clearTimeout(pending); pending = setTimeout(renderAll, 150); });
+  }
+  var img = new Image(); img.onload = function () { init(img); }; img.src = LOGO_SRC;
+})();
+</script>
+</body>
+</html>
