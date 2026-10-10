@@ -207,6 +207,17 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid 
 .ficha-grid dd { margin: 0; font-size: 14px; }
 .dato { display: inline-block; font: 500 11px/1.5 var(--mono); padding: 0 6px; border-radius: 4px; background: var(--fail-soft); color: var(--fail); }
 .doc { scroll-margin-top: 64px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.kpis > div { background: var(--soft); border-radius: 8px; padding: 14px 16px; display: grid; gap: 4px; }
+.kpis b { font: 800 30px/1 var(--display); color: var(--ink); font-variant-numeric: tabular-nums; }
+.kpis span { font-size: 13px; color: var(--muted); }
+.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 20px 32px; }
+.chart { margin: 0; display: grid; gap: 7px; align-content: start; min-width: 0; }
+.chart figcaption { font: 500 12px/1.4 var(--mono); color: var(--muted); margin-bottom: 4px; }
+.bar-row { display: grid; grid-template-columns: minmax(120px, 210px) minmax(0, 1fr) 48px; gap: 10px; align-items: center; font-size: 13px; }
+.bar { height: 12px; background: var(--soft); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); }
+.bar-row b { font: 500 12px/1 var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
 .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px 28px; }
 .facts p { margin: 4px 0 0; font-size: 15px; }
 #criticas td { font-size: 14px; }
@@ -238,7 +249,7 @@ footer a { word-break: break-all; }
     <div class="eyebrow">Grupo 7 · Comunicación corporativa · Análisis de identidad visual</div>
     <h1>Laboratorio de pruebas del signo Santander</h1>
     <p class="authors">Orianna Bardales Medina · Lara Feijóo Vázquez · Alberto Guijarro Ruiz · Ana Cristina Salazar</p>
-    <p class="lead">Once pruebas de verificación, una por cada criterio de calidad de Chaves y Belluccia, construidas sobre las especificaciones de la Guía básica de marca de Santander (Banco Santander, 2020). Haz cada prueba, marca tu veredicto y compáralo con el nuestro. Cada criterio tiene su pestaña, con la prueba y su ficha de evidencia: este laboratorio es también el anexo de nuestra presentación.</p>
+    <p class="lead">Once pruebas de verificación, una por cada criterio de calidad de Chaves y Belluccia, construidas sobre las especificaciones de la Guía básica de marca de Santander (Banco Santander, 2020). Incluye los resultados de un sondeo online con 31 personas. Haz cada prueba, marca tu veredicto y compáralo con el nuestro. Cada criterio tiene su pestaña, con la prueba y su ficha de evidencia: este laboratorio es también el anexo de nuestra presentación.</p>
     <p class="note">Trabajo académico de máster, sin relación con Banco Santander. Imágenes de partida: versiones principal y secundaria del logotipo extraídas en alta resolución de la Guía básica (Banco Santander, 2020, p. 6). Las pruebas son juicios guiados con una condición fijada de antemano, no mediciones. Tiempo estimado: 10–12 minutos.</p>
   </header>
 
@@ -280,12 +291,79 @@ footer a { word-break: break-all; }
 
   </div>
 
+  <section class="panel doc" id="sondeo" aria-labelledby="son-title">
+    <div class="panel-head"><h2 id="son-title">Sondeo online: lo que percibe el público</h2></div>
+    <p class="note">31 personas respondieron entre el 8 y el 9 de octubre de 2026 en Google Forms, sin saber de qué marca se trataba: 14 con formación en publicidad, diseño o marketing y 17 sin ella; 9 clientes de Santander. No se preguntó el país de residencia.</p>
+    <div class="kpis">
+      <div><b>87 %</b><span>identificó la marca solo con el símbolo</span></div>
+      <div><b>74 %</b><span>vio una llama o un fuego en 5 segundos</span></div>
+      <div><b>55 %</b><span>reconoció la llama original entre cuatro (azar: 25 %)</span></div>
+      <div><b>76 %</b><span>pensó en Santander al oír «banco rojo», antes de ver ninguna imagen</span></div>
+    </div>
+    <div class="charts">
+      <figure class="chart"><figcaption>Grado de acuerdo (% que marca 4 o 5) · media de 1 a 5</figcaption>
+<div class="bar-row"><span>El nombre se lee con claridad</span><span class="bar" aria-hidden="true"><i style="width:90.0%"></i></span><b>4,68</b></div>
+<div class="bar-row"><span>Se distingue de otros bancos</span><span class="bar" aria-hidden="true"><i style="width:81.0%"></i></span><b>4,26</b></div>
+<div class="bar-row"><span>Es fácil de recordar</span><span class="bar" aria-hidden="true"><i style="width:77.0%"></i></span><b>4,26</b></div>
+<div class="bar-row"><span>Parece una entidad financiera</span><span class="bar" aria-hidden="true"><i style="width:71.0%"></i></span><b>3,94</b></div>
+<div class="bar-row"><span>Llama la atención</span><span class="bar" aria-hidden="true"><i style="width:65.0%"></i></span><b>3,68</b></div>
+<div class="bar-row"><span>Se entiende fácilmente</span><span class="bar" aria-hidden="true"><i style="width:61.0%"></i></span><b>3,65</b></div>
+<div class="bar-row"><span>Parece actual</span><span class="bar" aria-hidden="true"><i style="width:61.0%"></i></span><b>3,61</b></div>
+      </figure>
+      <figure class="chart"><figcaption>Qué transmite el logotipo (% que marca cada atributo)</figcaption>
+<div class="bar-row"><span>Fuerza</span><span class="bar" aria-hidden="true"><i style="width:58.0%"></i></span><b>58 %</b></div>
+<div class="bar-row"><span>Solidez</span><span class="bar" aria-hidden="true"><i style="width:52.0%"></i></span><b>52 %</b></div>
+<div class="bar-row"><span>Energía</span><span class="bar" aria-hidden="true"><i style="width:52.0%"></i></span><b>52 %</b></div>
+<div class="bar-row"><span>Calor</span><span class="bar" aria-hidden="true"><i style="width:45.0%"></i></span><b>45 %</b></div>
+<div class="bar-row"><span>Liderazgo</span><span class="bar" aria-hidden="true"><i style="width:39.0%"></i></span><b>39 %</b></div>
+<div class="bar-row"><span>Seriedad</span><span class="bar" aria-hidden="true"><i style="width:29.0%"></i></span><b>29 %</b></div>
+<div class="bar-row"><span>Confianza</span><span class="bar" aria-hidden="true"><i style="width:29.0%"></i></span><b>29 %</b></div>
+<div class="bar-row"><span>Luz</span><span class="bar" aria-hidden="true"><i style="width:26.0%"></i></span><b>26 %</b></div>
+<div class="bar-row"><span>Progreso tecnológico</span><span class="bar" aria-hidden="true"><i style="width:16.0%"></i></span><b>16 %</b></div>
+<div class="bar-row"><span>Valentía</span><span class="bar" aria-hidden="true"><i style="width:16.0%"></i></span><b>16 %</b></div>
+<div class="bar-row"><span>Cercanía</span><span class="bar" aria-hidden="true"><i style="width:10.0%"></i></span><b>10 %</b></div>
+<div class="bar-row"><span>Humanidad</span><span class="bar" aria-hidden="true"><i style="width:3.0%"></i></span><b>3 %</b></div>
+      </figure>
+      <figure class="chart"><figcaption>¿Cuál era la llama que viste? (% de respuestas)</figcaption>
+<div class="bar-row"><span>Original</span><span class="bar" aria-hidden="true"><i style="width:55.0%"></i></span><b>55 %</b></div>
+<div class="bar-row"><span>Reflejada</span><span class="bar" aria-hidden="true"><i style="width:32.0%"></i></span><b>32 %</b></div>
+<div class="bar-row"><span>Ensanchada</span><span class="bar" aria-hidden="true"><i style="width:6.0%"></i></span><b>6 %</b></div>
+<div class="bar-row"><span>Girada</span><span class="bar" aria-hidden="true"><i style="width:6.0%"></i></span><b>6 %</b></div>
+      </figure>
+      <figure class="chart"><figcaption>«Escribe el primer banco que te venga a la cabeza: rojo» (n = 29)</figcaption>
+<div class="bar-row"><span>Santander</span><span class="bar" aria-hidden="true"><i style="width:76%"></i></span><b>76 %</b></div>
+<div class="bar-row"><span>Otros bancos</span><span class="bar" aria-hidden="true"><i style="width:21%"></i></span><b>21 %</b></div>
+<div class="bar-row"><span>Ninguno</span><span class="bar" aria-hidden="true"><i style="width:3%"></i></span><b>3 %</b></div>
+      </figure>
+    </div>
+    <div class="tablebox"><table>
+      <thead><tr><th>Afirmación (media de 1 a 5)</th><th>Publicidad, diseño o marketing (n = 14)</th><th>Resto (n = 17)</th><th>Clientes (n = 9)</th><th>No clientes (n = 22)</th></tr></thead>
+      <tbody>
+        <tr><td>Parece una entidad financiera</td><td>3,64</td><td>4,18</td><td>4,00</td><td>3,91</td></tr>
+        <tr><td>Se entiende fácilmente</td><td>3,64</td><td>3,65</td><td>4,11</td><td>3,45</td></tr>
+        <tr><td>El nombre se lee con claridad</td><td>4,57</td><td>4,76</td><td>4,67</td><td>4,68</td></tr>
+        <tr><td>Llama la atención</td><td>3,64</td><td>3,71</td><td>3,44</td><td>3,77</td></tr>
+        <tr><td>Es fácil de recordar</td><td>4,07</td><td>4,41</td><td>4,56</td><td>4,14</td></tr>
+        <tr><td>Se distingue de otros bancos</td><td>4,21</td><td>4,29</td><td>4,22</td><td>4,27</td></tr>
+        <tr><td>Parece actual</td><td>3,64</td><td>3,59</td><td>3,78</td><td>3,55</td></tr>
+      </tbody>
+    </table></div>
+    <div class="facts">
+      <div><span class="label">Lo que dicen con sus palabras</span><p>Las palabras más repetidas fueron confianza y banco (6 veces), seriedad y seguridad (4). Hubo también 6 menciones negativas (robo, abuso, interés, antiguo, aburrido, setentero), que hablan más de la imagen de la banca que del logotipo.</p></div>
+      <div><span class="label">Lectura</span><p>Los publicistas son algo más exigentes con la pertinencia (3,64 frente a 4,18), pero coinciden en lo esencial: se lee muy bien, se distingue y se recuerda. Ser cliente apenas cambia el resultado, salvo en «se entiende fácilmente». Que aparezcan «Fórmula 1» o «fútbol» entre las palabras asociadas refleja el peso de sus patrocinios en la notoriedad de la marca (Blanco-Callejo, 2010).</p></div>
+      <div><span class="label">Depuración</span><p>Se analizaron las 31 respuestas. Dos personas respondieron a la pregunta de colores con palabras que no eran bancos (por ejemplo, «manzana» o «hambre»): se excluyeron solo de esa pregunta (n = 29). Los porcentajes llevan intervalos de confianza amplios por el tamaño de la muestra. <a href="https://fei461.github.io/santander/datos/sondeo.csv" target="_blank" rel="noopener">Datos brutos anónimos (CSV)</a>.</p></div>
+      <div><span class="label">Correspondencia de opciones</span><p>En la pregunta de las cuatro llamas, las opciones 1 a 4 corresponden a A–D: 1 reflejada, 2 original, 3 ensanchada y 4 girada.</p></div>
+    </div>
+  </section>
+
   <section class="panel doc" id="contexto" aria-labelledby="ctx-title">
     <div class="panel-head"><h2 id="ctx-title">Contexto: el cambio de 2018</h2></div>
     <div class="facts">
-      <div><span class="label">Qué cambió</span><p>La llama se estiliza, el nombre pierde los remates y el rojo pasa del Pantone 032 al 485, más brillante. Llegan también tipografía propia, iconos, ilustraciones y tono de voz (García, 2018; Reason Why, 2018).</p></div>
-      <div><span class="label">Quién</span><p>Interbrand Madrid, con una familia tipográfica propia desarrollada junto a Monotype (García, 2018).</p></div>
+      <div><span class="label">Antes de 2018</span><p>El nombre iba en una serifa «tradicional» (Hillier, 2019) y el logotipo se aplicaba sobre un fondo rojo (Thalassinou, 2018). Era la primera renovación de imagen desde 2004 (Bustos, 2018).</p></div>
+      <div><span class="label">Qué cambió</span><p>La llama se redibuja sobre una retícula geométrica, el nombre pierde los remates, el fondo rojo da paso al blanco y el rojo pasa del Pantone 032 al 485, más brillante. Llegan tres tipografías propias, iconos, ilustraciones y sonido (García, 2018; Hillier, 2019; Reason Why, 2018).</p></div>
+      <div><span class="label">Quién</span><p>Interbrand, tras un año de entrevistas con la dirección, grupos con empleados y encuestas a clientes (Bustos, 2018), con tipografías propias desarrolladas junto a Monotype (García, 2018; Monotype, s. f.).</p></div>
       <div><span class="label">Por qué</span><p>Conectar con un cliente digital. Según el banco, la visibilidad mejoró un 20 % en el móvil. «Evolución, no revolución», en palabras de Ana Botín (Reason Why, 2018).</p></div>
+      <div><span class="label">Para ver</span><p>Vídeos recopilados por el grupo: <a href="https://youtu.be/BeGHaKA4UXA" target="_blank" rel="noopener">evolución de la marca</a>, <a href="https://youtu.be/QK7CrQ9yfdk" target="_blank" rel="noopener">presentación del logotipo</a>, <a href="https://youtu.be/f-t0AeV3P3Q" target="_blank" rel="noopener">el cambio de logo</a> y <a href="https://youtu.be/atj4kWEVup0" target="_blank" rel="noopener">evolución del logotipo</a>.</p></div>
       <div><span class="label">Historia</span><p>Fundación en 1857; la llama, en 1986; el rojo, desde 1989; marca internacional desde 2004. La de 2018 es la novena evolución de la marca (Banco Santander, 2022).</p></div>
     </div>
   </section>
@@ -310,11 +388,12 @@ footer a { word-break: break-all; }
       </div>
     </div>
     <section class="ficha" aria-label="Ficha de evidencia del criterio 1">
-      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 1</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×2</span></div>
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 1</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×2</span></div>
       <dl class="ficha-grid">
-        <div><dt>Qué dice la guía</dt><dd>Banco Santander (2020, p. 5): la llama «emite luz, calor y humanidad» y nace de una plataforma sólida; el rojo remite a energía, fuerza, valentía y liderazgo.</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd>«Parece una entidad financiera»: media <span class="dato">pendiente</span>/5 · <span class="dato">pendiente</span> % con 4 o 5. Atributos más marcados: <span class="dato">pendiente</span>.</dd></div>
-        <div><dt>Nuestra valoración</dt><dd>La plataforma ovalada aporta la solidez que exige la banca y la llama, la calidez de una marca cercana.</dd></div>
+        <div><dt>Antes y después de 2018</dt><dd>Antes: una tipografía con rasgos de clásicos como Times, Century o Bodoni, que la hacían parecer anticuada (Monotype, s. f.), sobre un fondo rojo (Thalassinou, 2018). Ahora: de las dos propuestas de Monotype se eligió la humanista, más cercana (Monotype, s. f.), y el signo encaja con un banco que se presenta como más digital y abierto (Banco Santander, s. f.). Responde a la idea de marca democrática: abierta, reconocible y fácil de compartir (Laidler-Kylander y Shepard Stenzel, 2014).</dd></div>
+        <div><dt>Qué dice la guía</dt><dd>La llama «emite luz, calor y humanidad» y nace de una plataforma sólida; el rojo remite a energía, fuerza, valentía y liderazgo (Banco Santander, 2020, p. 5).</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>«Parece el logotipo de una entidad financiera»: 3,94/5 (71 % de acuerdo). Atributos más percibidos: fuerza (58 %), solidez y energía (52 %), calor (45 %). Apenas se perciben cercanía (10 %), progreso tecnológico (16 %) y humanidad (3 %).</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Encaja con la banca, pero el público no percibe la cercanía ni el progreso tecnológico que la marca declara. Bajamos la nota provisional de 5 a 4 por los datos.</dd></div>
       </dl>
     </section>
   </article>
@@ -354,8 +433,9 @@ footer a { word-break: break-all; }
     <section class="ficha" aria-label="Ficha de evidencia del criterio 2">
       <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 2</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×2</span></div>
       <dl class="ficha-grid">
-        <div><dt>Qué dice la guía</dt><dd>Versiones positiva y negativa (p. 6), versión en blanco y negro (p. 7) y artes finales en CMYK, PMS, RGB y B/N (p. 10).</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd>No aplica: es una propiedad técnica, comprobada en esta prueba.</dd></div>
+        <div><dt>Antes y después de 2018</dt><dd>Antes: los remates finos de la serifa se degradaban al reducirse. Ahora: la llama se redibujó sobre una retícula con líneas equidistantes y ángulos uniformes (Monotype, s. f.) y el trazo es de grosor constante, lo que se reproduce mejor en cualquier soporte (Bringhurst, 2013; Kane, 2011). El rojo, más brillante, se adapta mejor a lo digital (Bustos, 2018).</dd></div>
+        <div><dt>Qué dice la guía</dt><dd>Versiones positiva y negativa (p. 6), versión en blanco y negro (p. 7) y artes finales en CMYK, PMS, RGB y B/N (p. 10) (Banco Santander, 2020).</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>No aplica: es una propiedad técnica, comprobada en la prueba 2.</dd></div>
         <div><dt>Nuestra valoración</dt><dd>Formas cerradas y sin detalles finos: nada se pierde al reducir a una tinta. Contraste del positivo: 4,6:1.</dd></div>
       </dl>
     </section>
@@ -408,9 +488,10 @@ footer a { word-break: break-all; }
     <section class="ficha" aria-label="Ficha de evidencia del criterio 3">
       <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 3</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×2</span></div>
       <dl class="ficha-grid">
+        <div><dt>Antes y después de 2018</dt><dd>Antes: una serifa «tradicional» (Hillier, 2019) cuyos detalles exigen más tiempo de lectura a distancia o en pantallas pequeñas (Kane, 2011). Ahora: una tipografía para el logotipo y otras dos, Headline y Text, para cada tamaño de lectura (Hillier, 2019; Monotype, s. f.). Lo que se procesa con fluidez tiende a preferirse (Janiszewski y Meyvis, 2001).</dd></div>
         <div><dt>Qué dice la guía</dt><dd>Mínimos de 25 px (principal), 50 px (secundaria) y 16 px (símbolo); espacio de seguridad igual al ancho del símbolo (p. 8).</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd>«El nombre se lee con claridad»: media <span class="dato">pendiente</span>/5.</dd></div>
-        <div><dt>Nuestra valoración</dt><dd>La letra sin remates gana nitidez en pantalla (García, 2018). Restamos un punto porque la versión secundaria necesita el doble de tamaño mínimo.</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>«El nombre se lee con claridad»: 4,68/5 (90 % de acuerdo), la nota más alta del sondeo.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>El dato del público es excelente. Mantenemos el 4 porque la versión secundaria necesita el doble de tamaño mínimo que la principal.</dd></div>
       </dl>
     </section>
   </article>
@@ -443,11 +524,12 @@ footer a { word-break: break-all; }
       </div>
     </div>
     <section class="ficha" aria-label="Ficha de evidencia del criterio 4">
-      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 4</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×1</span></div>
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 4</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×1</span></div>
       <dl class="ficha-grid">
-        <div><dt>Qué dice la guía</dt><dd>La guía declara una llama que emerge de una plataforma ovalada (p. 5). Sesgo a tener en cuenta: quien ya conoce la marca la reconoce por memoria, no solo por diseño.</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd><span class="dato">pendiente</span> % vio una llama o un fuego (P5). Palabras más repetidas (P7): <span class="dato">pendiente</span>. Se analiza por separado a clientes y no clientes de Santander para controlar la familiaridad.</dd></div>
-        <div><dt>Nuestra valoración</dt><dd>Provisional: sube a 5 si más del 70 % identifica la llama y baja a 3 si no llega al 40 %.</dd></div>
+        <div><dt>Antes y después de 2018</dt><dd>Antes: el fondo rojo competía con la llama. Ahora: la llama, simplificada sobre una retícula geométrica, ocupa más superficie y se asienta más baja sobre el óvalo para seguir siendo legible en pantallas pequeñas (Hillier, 2019; Monotype, s. f.).</dd></div>
+        <div><dt>Qué dice la guía</dt><dd>La guía declara una llama que emerge de una plataforma ovalada (p. 5).</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>74 % vio una llama, un fuego o una antorcha tras 5 segundos (IC 95 %: 57–86 %); 97 % recordó el color rojo. «Se entiende fácilmente»: 3,65/5 (61 %).</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Supera el umbral del 70 % fijado antes del sondeo: sube de 4 a 5. Matiz honesto: el intervalo de confianza también incluye valores por debajo del umbral.</dd></div>
       </dl>
     </section>
   </article>
@@ -489,8 +571,9 @@ footer a { word-break: break-all; }
     <section class="ficha" aria-label="Ficha de evidencia del criterio 5">
       <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 5</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×1</span></div>
       <dl class="ficha-grid">
-        <div><dt>Qué dice la guía</dt><dd>La guía no admite efectos: versiones planas a una tinta (pp. 6–7).</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd>No aplica.</dd></div>
+        <div><dt>Antes y después de 2018</dt><dd>Antes: nombre, símbolo y un fondo rojo que hacía de soporte (Thalassinou, 2018). Ahora: solo los identificadores primarios, la llama (isotipo) y el nombre (logotipo), que juntos forman un imagotipo (García, 2011). El fondo era un identificador secundario prescindible.</dd></div>
+        <div><dt>Qué dice la guía</dt><dd>La guía no admite efectos: solo versiones planas a una tinta (pp. 6–7).</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>No aplica.</dd></div>
         <div><dt>Nuestra valoración</dt><dd>Inventario del signo: 2 elementos, 1 color plano y 0 efectos. Ningún añadido lo mejora.</dd></div>
       </dl>
     </section>
@@ -518,8 +601,9 @@ footer a { word-break: break-all; }
     <section class="ficha" aria-label="Ficha de evidencia del criterio 6">
       <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 6</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×2</span></div>
       <dl class="ficha-grid">
+        <div><dt>Antes y después de 2018</dt><dd>Antes: el bloque rojo condicionaba cada aplicación. Ahora: el rediseño se pensó para una marca global y digital (Brujo, 2018), con un sistema de pictogramas, ilustración, fotografía y sonido construido alrededor del signo (Banco Santander, s. f.).</dd></div>
         <div><dt>Qué dice la guía</dt><dd>Tres versiones para tres situaciones (p. 6); solo cuatro fondos permitidos: Santander Red, Rio, Lisbon y blanco (p. 12).</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd>No aplica.</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>No aplica.</dd></div>
         <div><dt>Nuestra valoración</dt><dd>El sistema prevé una versión para cada restricción de espacio, en lugar de deformar el signo.</dd></div>
       </dl>
     </section>
@@ -544,9 +628,10 @@ footer a { word-break: break-all; }
     <section class="ficha" aria-label="Ficha de evidencia del criterio 7">
       <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 7</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×1</span></div>
       <dl class="ficha-grid">
+        <div><dt>Antes y después de 2018</dt><dd>Antes: convenciones de la era analógica. Ahora: se conservan la llama y el rojo y se actualiza todo lo demás. Renovar visualmente un logotipo mejora la percepción de modernidad de una marca (Müller et al., 2013).</dd></div>
         <div><dt>Qué dice la guía</dt><dd>La llama se mantiene desde 1986 y el rojo desde 1989, a lo largo de nueve evoluciones (Banco Santander, 2022).</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd>«Parece actual»: media <span class="dato">pendiente</span>/5.</dd></div>
-        <div><dt>Nuestra valoración</dt><dd>Restamos un punto: el diseño plano también es una moda y habrá que revisarlo.</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>«Parece actual»: 3,61/5 (61 % de acuerdo), de las notas más bajas del sondeo.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Restamos un punto: el público no lo percibe especialmente moderno y el diseño plano también es una moda.</dd></div>
       </dl>
     </section>
   </article>
@@ -577,9 +662,10 @@ footer a { word-break: break-all; }
     <section class="ficha" aria-label="Ficha de evidencia del criterio 8">
       <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 8</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×1</span></div>
       <dl class="ficha-grid">
+        <div><dt>Antes y después de 2018</dt><dd>Antes: el fondo rojo atraía la atención por sí mismo. Ahora: llama roja sobre blanco, con una relación figura–fondo clara, que favorece la memoria (Costa, 2004). Conservar nombre, llama y rojo evita el rechazo de los clientes más comprometidos, que reaccionan peor a los rediseños (Walsh et al., 2010).</dd></div>
         <div><dt>Qué dice la guía</dt><dd>No aplica: se mide en las personas, no en la guía.</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd><span class="dato">pendiente</span> % reconoció la llama original entre cuatro casi iguales (P10; por azar sería un 25 %) · <span class="dato">pendiente</span> % identificó la marca solo con el símbolo (P4).</dd></div>
-        <div><dt>Nuestra valoración</dt><dd>Provisional: sube a 5 si el reconocimiento supera el 60 %, más del doble del azar.</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>55 % reconoció la llama original entre cuatro casi iguales (azar: 25 %; p < 0,001). El error más común fue la versión reflejada (32 %). 87 % identificó la marca solo con el símbolo; 82 % entre quienes no son clientes.</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Muy por encima del azar, pero por debajo del 60 % que fijamos para el 5: se queda en 4.</dd></div>
       </dl>
     </section>
   </article>
@@ -605,11 +691,12 @@ footer a { word-break: break-all; }
       <p class="readout" id="p9-readout" aria-live="polite">Pulsa una ronda para empezar. El cronómetro arranca cuando aparece la cuadrícula.</p>
     </div>
     <section class="ficha" aria-label="Ficha de evidencia del criterio 9">
-      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 9</span><span class="score">Nota del Grupo 7: <b>5/5</b> · peso ×1</span></div>
+      <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 9</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×1</span></div>
       <dl class="ficha-grid">
+        <div><dt>Antes y después de 2018</dt><dd>Antes: el color estaba en el fondo. Ahora: el rojo pasa al signo (Pantone 485, más brillante) y el blanco, «sinónimo de mayor transparencia, sencillez y visibilidad», gana espacio (Bustos, 2018). El rojo se asocia a la excitación y la energía (Labrecque y Milne, 2012), y el contraste con el blanco ayuda a destacar en entornos saturados (Wheeler, 2017).</dd></div>
         <div><dt>Qué dice la guía</dt><dd>En 2018 el rojo pasó del Pantone 032 al 485, un tono más brillante (Reason Why, 2018).</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd>«Llama la atención»: media <span class="dato">pendiente</span>/5.</dd></div>
-        <div><dt>Nuestra valoración</dt><dd>La diferencia entre la ronda en color y la ronda en grises mide cuánto aporta el rojo.</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>«Llama la atención»: 3,68/5 (65 % de acuerdo).</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>El rojo funciona, pero el público no lo vive como un signo especialmente llamativo. Bajamos la nota provisional de 5 a 4 por los datos.</dd></div>
       </dl>
     </section>
   </article>
@@ -635,9 +722,10 @@ footer a { word-break: break-all; }
     <section class="ficha" aria-label="Ficha de evidencia del criterio 10">
       <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 10</span><span class="score">Nota del Grupo 7: <b>4/5</b> · peso ×1</span></div>
       <dl class="ficha-grid">
+        <div><dt>Antes y después de 2018</dt><dd>El rojo y la llama son los activos que Santander decidió conservar (Banco Santander, s. f.). Desde 2010 opera como una sola marca global en casi todos sus mercados (Blanco-Callejo, 2010), y ahora suma tipografías exclusivas (Monotype, s. f.).</dd></div>
         <div><dt>Qué dice la guía</dt><dd>Único gran banco español con el rojo como color principal.</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd><span class="dato">pendiente</span> % asocia el color rojo a Santander antes de ver ninguna imagen (P3b).</dd></div>
-        <div><dt>Nuestra valoración</dt><dd>Los naranjas de ING y Bankinter son la frontera que hay que vigilar. Los colores de la competencia son aproximados, pero un error de ±5° no cambia el resultado: el más cercano sigue a unos 23°.</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>Antes de ver ninguna imagen, el 76 % (22 de 29) escribió «Santander» como primer banco asociado al rojo; el 21 % nombró otros bancos. «Se distingue de otros bancos»: 4,26/5 (81 % de acuerdo).</dd></div>
+        <div><dt>Nuestra valoración</dt><dd>Tres de cada cuatro personas ligan el rojo a Santander antes de ver el logotipo. Restamos un punto porque el rojo no es exclusivo para todos y los naranjas de ING y Bankinter quedan a solo 23°.</dd></div>
       </dl>
     </section>
   </article>
@@ -680,8 +768,9 @@ footer a { word-break: break-all; }
     <section class="ficha" aria-label="Ficha de evidencia del criterio 11">
       <div class="ficha-head"><span class="label">Ficha de evidencia · criterio 11</span><span class="score">Nota del Grupo 7: <b>3/5</b> · peso ×1</span></div>
       <dl class="ficha-grid">
+        <div><dt>Antes y después de 2018</dt><dd>Antes: el logotipo encajado en el bloque rojo era difícil de descomponer. Ahora: llama y nombre funcionan juntos o por separado (Banco Santander, 2020, p. 6), con pictogramas, ilustraciones y sonido de marca (Banco Santander, s. f.).</dd></div>
         <div><dt>Qué dice la guía</dt><dd>Cobranding con 4 módulos de separación y una línea de 1 pt (p. 9). La guía básica no publica un sistema de submarcas.</dd></div>
-        <div><dt>Qué dice el sondeo online</dt><dd>No aplica.</dd></div>
+        <div><dt>Qué dice el sondeo (n = 31)</dt><dd>No aplica.</dd></div>
         <div><dt>Nuestra valoración</dt><dd>El signo admite variantes, pero lo puntuamos por lo documentado, no por lo supuesto.</dd></div>
       </dl>
     </section>
@@ -697,7 +786,7 @@ footer a { word-break: break-all; }
         <tr><td>Miguel Novillo (El Ruso de Rocky)</td><td>Positiva</td><td>Primer paso necesario; letra sin remates, más moderna y aplicable</td><td>Coincide con Reproducibilidad y Versatilidad</td></tr>
         <tr><td>Mariam Cuesta y Ed Carrasco (Tango)</td><td>Positiva, con matiz</td><td>Mantiene cercanía y confianza, con «ligeras sensaciones tradicionales»</td><td>Ese poso tradicional refuerza la Pertinencia en banca</td></tr>
         <tr><td>Félix Carral (Ogilvy &amp; Mather)</td><td>Crítica</td><td>Poco radical y quizá innecesario; lamenta perder la serifa</td><td>Un cambio radical habría destruido 30 años de equidad de marca</td></tr>
-        <tr><td>Nacho Herranz (Tribal Worldwide)</td><td>Matizada</td><td>Duda de que el cambio sea más que estético</td><td>El logo no basta: es uno de nuestros dos riesgos</td></tr>
+        <tr><td>Nacho Herranz (Tribal Worldwide)</td><td>Matizada</td><td>Duda de que el cambio sea más que estético</td><td>Tiene razón: el sondeo muestra que la cercanía y lo digital apenas se perciben (10 % y 16 %). Es uno de nuestros riesgos</td></tr>
         <tr><td>María García Campos (LOLA MullenLowe)</td><td>Matizada</td><td>Necesario, pero llega tarde a lo digital</td><td>Queda fuera del alcance de la identidad visual</td></tr>
         <tr><td>Fer Rullán (VCCP)</td><td>Matizada</td><td>Poco sorprendente; falta un sistema más dinámico</td><td>Coincide con nuestro 3/5 en Declinabilidad</td></tr>
       </tbody>
@@ -707,23 +796,47 @@ footer a { word-break: break-all; }
   <section class="panel doc" id="metodologia" aria-labelledby="met-title">
     <div class="panel-head"><h2 id="met-title">Metodología y limitaciones</h2></div>
     <div class="facts">
-      <div><span class="label">Fuentes</span><p>La Guía básica de marca (Banco Santander, 2020), las once pruebas de verificación de este laboratorio, las valoraciones de ocho expertos (Reason Why, 2018) y un sondeo online con n = <span class="dato">pendiente</span> personas.</p></div>
-      <div><span class="label">Sondeo</span><p>Google Forms difundido entre contactos durante 24 horas. La marca no se nombra hasta el final; se compara a quienes tienen formación en publicidad, diseño o marketing con quienes no la tienen.</p></div>
+      <div><span class="label">Fuentes</span><p>La Guía básica de marca (Banco Santander, 2020), las once pruebas de verificación de este laboratorio, prensa especializada (Brujo, 2018; Bustos, 2018; García, 2018; Hillier, 2019; Reason Why, 2018; Thalassinou, 2018), el caso de Monotype (s. f.), literatura académica sobre marca y logotipos y un sondeo online con 31 personas.</p></div>
+      <div><span class="label">Por qué este formato</span><p>Escribimos para un cliente metódico (Cloninger, 1987): baja búsqueda de novedad, alta evitación del daño y baja dependencia de la recompensa. Por eso cada titular es una conclusión, cada dato lleva su fuente, mostramos las críticas y los puntos débiles, y todo se puede comprobar aquí. La presentación sigue la regla 10/20/30 (Kawasaki, 2005).</p></div>
       <div><span class="label">Escala</span><p>Nota de 1 a 5 por criterio; un criterio se cumple con 3 o más. Pertinencia, Reproducibilidad, Legibilidad y Versatilidad pesan el doble por ser críticas en banca.</p></div>
-      <div><span class="label">Sensibilidad</span><p>Con pesos: 67/75 (89 %). Sin pesos: 48/55 (87 %). La conclusión no depende de la ponderación.</p></div>
-      <div><span class="label">Umbrales</span><p>8 de 12 atributos (dos tercios) · 3 s en la búsqueda visual (un vistazo) · 15° de tono (la mitad de la distancia entre el rojo y el naranja en el círculo cromático) · 70 % y 40 % en Inteligibilidad (mayoría clara y minoría). Son convenciones del grupo, fijadas antes de recoger el sondeo.</p></div>
-      <div><span class="label">Límites</span><p>Muestra de conveniencia, no representativa: los datos son indicios. Online no se puede impedir volver atrás para ver una imagen. Preguntar por colores de bancos al inicio puede activar la marca antes de la prueba del símbolo. La familiaridad con Santander infla el reconocimiento. El laboratorio usa una estética neutra para no influir en la evaluación.</p></div>
+      <div><span class="label">Sensibilidad</span><p>Con pesos: 65/75 (87 %). Sin pesos: 47/55 (85 %). La conclusión no depende de la ponderación.</p></div>
+      <div><span class="label">Umbrales</span><p>8 de 12 atributos (dos tercios) · 3 s en la búsqueda visual (un vistazo) · 15° de tono (la mitad de la distancia entre el rojo y el naranja en el círculo cromático) · 70 % y 40 % en Inteligibilidad · 60 % en Pregnancia. Son convenciones del grupo, fijadas antes de recoger el sondeo.</p></div>
+      <div><span class="label">Cambios por los datos</span><p>Antes del sondeo dábamos 67/75. Con los datos, Inteligibilidad sube a 5 y Pertinencia y Vocatividad bajan a 4: el resultado final es 65/75.</p></div>
+      <div><span class="label">Sondeo</span><p>Google Forms, 24 horas, difundido entre contactos. La marca no se nombra hasta el final. No se recogieron datos personales: ni nombre, ni correo, ni país.</p></div>
+      <div><span class="label">Límites</span><p>Muestra de conveniencia (n = 31), por debajo de las 40 respuestas previstas y no representativa: los datos son indicios y no se pueden atribuir a un mercado concreto, porque no preguntamos el país. Online no se puede impedir volver atrás. Preguntar por colores de bancos al inicio activa la marca: entre quienes no dijeron «Santander» para el rojo, el 67 % (6 de 9) identificó igualmente el símbolo. El laboratorio usa una estética neutra para no influir en la evaluación.</p></div>
     </div>
   </section>
 
   <footer id="referencias">
     <h2 class="refs-title">Referencias</h2>
     <ul class="refs">
-      <li>Banco Santander. (2020). <i>Guía básica</i> [Guía de marca]. <a href="https://www.santander.com/content/dam/santander-com/es/documentos/marca-santander/Guia_Marca_060520_es.pdf" target="_blank" rel="noopener">https://www.santander.com/content/dam/santander-com/es/documentos/marca-santander/Guia_Marca_060520_es.pdf</a></li>
+      <li>Banco Santander. (2020). <i>Guía básica</i> [Guía de marca]. https://www.santander.com/content/dam/santander-com/es/documentos/marca-santander/Guia_Marca_060520_es.pdf</li>
+      <li>Banco Santander. (2022, 6 de octubre). <i>A por los dos siglos de vida: algunas curiosidades sobre la historia de la marca Santander</i>. https://www.santander.com/es/stories/a-por-los-dos-siglos-de-vida-algunas-curiosidades-sobre-la-historia-de-la-marca-santander</li>
+      <li>Banco Santander. (s. f.). <i>When should a brand evolve? Our experience at Santander</i>. https://www.santander.com/en/stories/when-should-a-brand-evolve--our-experience-at-santander</li>
+      <li>Blanco-Callejo, M. (2010). Banco Santander, en la «pole position» de las marcas financieras internacionales. <i>Journal of Globalization, Competitiveness &amp; Governability, 4</i>(2), 54–71. http://www.redalyc.org/articulo.oa?id=511851324007</li>
+      <li>Bringhurst, R. (2013). <i>The elements of typographic style</i> (versión 4.0). Hartley &amp; Marks.</li>
+      <li>Brujo, G. (2018, 18 de abril). <i>A leader evolves: How Santander is refreshing its brand</i>. Brand Knew Magazine. https://www.brandknewmag.com/?p=12250</li>
+      <li>Bustos, V. (2018, 23 de marzo). <i>Banco Santander potencia su estrategia digital con una nueva imagen</i>. Merca2. https://www.merca2.es/2018/03/23/banco-santander-estrategia-digital-56789/</li>
       <li>Chaves, N. y Belluccia, R. (2003). <i>La marca corporativa: Gestión y diseño de símbolos y logotipos</i>. Paidós.</li>
-      <li>W3C. (2018). <i>Web Content Accessibility Guidelines (WCAG) 2.1</i>. <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener">https://www.w3.org/TR/WCAG21/</a></li>
+      <li>Cloninger, C. R. (1987). A systematic method for clinical description and classification of personality variants: A proposal. <i>Archives of General Psychiatry, 44</i>(6), 573–588.</li>
+      <li>Costa, J. (2004). <i>La imagen de marca: Un fenómeno social</i>. Paidós.</li>
+      <li>García, M. (2011, 26 de abril). <i>Tipos de logos y diferencias: Logotipo, isotipo, imagotipo e isologo</i>. Brandemia. https://brandemia.org/hablemos-con-propiedad-logotipo-isotipo-imagotipo-isologo-imagen-corporativa-identidad</li>
+      <li>García, Ó. (2018, 28 de marzo). <i>Banco Santander presenta su nueva imagen alineada con su estrategia digital</i>. Brandemia. https://brandemia.org/banco-santander-presenta-su-nueva-imagen-alineada-con-su-estrategia-digital</li>
+      <li>Hillier, L. (2019, 23 de mayo). <i>How Santander rebranded its visual identity for the 21st century</i>. Econsultancy. https://econsultancy.com/how-santander-rebranded-its-visual-identity-for-the-21st-century/</li>
+      <li>Janiszewski, C. y Meyvis, T. (2001). Effects of brand logo complexity, repetition, and spacing on processing fluency and judgment. <i>Journal of Consumer Research, 28</i>(1), 18–32.</li>
+      <li>Kane, J. (2011). <i>A type primer</i> (2.ª ed.). Laurence King.</li>
+      <li>Kawasaki, G. (2005, 30 de diciembre). <i>The 10/20/30 rule of PowerPoint</i>. Guy Kawasaki.</li>
+      <li>Labrecque, L. I. y Milne, G. R. (2012). Exciting red and competent blue: The importance of color in marketing. <i>Journal of the Academy of Marketing Science, 40</i>(5), 711–727.</li>
+      <li>Laidler-Kylander, N. y Shepard Stenzel, J. (2014). <i>The role of brand in the nonprofit sector</i>. Jossey-Bass.</li>
+      <li>Monotype. (s. f.). <i>Creating a consistent identity for an iconic banking group</i> [Caso de estudio]. https://enterprise.monotype.com/resources/case-studies/santander</li>
+      <li>Müller, B., Kocher, B. y Crettaz, A. (2013). The effects of visual rejuvenation through brand logos. <i>Journal of Business Research, 66</i>(1), 82–88.</li>
+      <li>Reason Why. (2018, 28 de marzo). <i>Así valoran los expertos la nueva imagen del Santander</i>. https://www.reasonwhy.es/actualidad/anunciantes/asi-valoran-los-expertos-la-nueva-imagen-del-santander-2018-03-28</li>
+      <li>Thalassinou, M. (2018, 28 de marzo). <i>Santander updates logo and enters digital age</i>. Transform Magazine. https://www.transformmagazine.net/articles/2018/santander-updates-logo-and-enters-digital-age/</li>
+      <li>W3C. (2018). <i>Web Content Accessibility Guidelines (WCAG) 2.1</i>. https://www.w3.org/TR/WCAG21/</li>
+      <li>Walsh, M. F., Winterich, K. P. y Mittal, V. (2010). Do logo redesigns help or hurt your brand? The role of brand commitment. <i>Journal of Product &amp; Brand Management, 19</i>(2), 76–84.</li>
+      <li>Wheeler, A. (2017). <i>Designing brand identity</i> (5.ª ed.). Wiley.</li>
     </ul>
-    <p><b>Notas.</b> Las definiciones de los criterios siguen el enunciado de la asignatura, basado en Chaves y Belluccia (2003). Los números de página remiten a la Guía básica (Banco Santander, 2020). El umbral de contraste de 3:1 procede del criterio 1.4.11 de WCAG 2.1. Los colores de la competencia (prueba 10) son aproximados y los estilos de época (prueba 7) son recreaciones genéricas, no versiones históricas de la marca. La tipografía del descriptor (prueba 11) es Nunito, sustituta de las tipografías corporativas, que no son públicas.</p>
+    <p><b>Notas.</b> Las definiciones de los criterios siguen el enunciado de la asignatura, basado en Chaves y Belluccia (2003). Datos del sondeo: elaboración propia (Grupo 7, octubre de 2026). Los números de página remiten a la Guía básica (Banco Santander, 2020). El umbral de contraste de 3:1 procede del criterio 1.4.11 de las WCAG 2.1 (W3C, 2018). Los colores de la competencia (prueba 10) son aproximados y los estilos de época (prueba 7) son recreaciones genéricas, no versiones históricas de la marca. La tipografía del descriptor (prueba 11) es Nunito, sustituta de las tipografías corporativas, que no son públicas.</p>
     <p>El logotipo es una marca registrada de Banco Santander, S.A. y se reproduce solo con fines de análisis académico. Laboratorio elaborado por el Grupo 7. Tus veredictos se guardan únicamente en este navegador.</p>
   </footer>
 </div>
@@ -736,7 +849,7 @@ footer a { word-break: break-all; }
   var RED = "#ec0000";
   var STORE = "lab-santander-v2";
 
-  var OURS = [5, 5, 4, 4, 5, 5, 4, 4, 5, 4, 3];
+  var OURS = [4, 5, 4, 5, 5, 5, 4, 4, 4, 4, 3];
   var CRIT = ["Pertinencia", "Reproducibilidad", "Legibilidad", "Inteligibilidad", "Suficiencia", "Versatilidad", "Vigencia", "Pregnancia", "Vocatividad", "Singularidad", "Declinabilidad"];
 
   function $(id) { return document.getElementById(id); }
@@ -750,8 +863,8 @@ footer a { word-break: break-all; }
   try { var saved = JSON.parse(localStorage.getItem(STORE) || "null"); if (saved && typeof saved === "object") { state.v = saved.v || {}; state.attrs = saved.attrs || {}; } } catch (e) {}
   function save() { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) {} }
 
-  var PANELS = ["inicio", "contexto", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "criticas", "metodologia", "referencias"];
-  var LABEL = { inicio: "Inicio", contexto: "Contexto", criticas: "Críticas", metodologia: "Metodología", referencias: "Referencias" };
+  var PANELS = ["inicio", "contexto", "sondeo", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "criticas", "metodologia", "referencias"];
+  var LABEL = { inicio: "Inicio", contexto: "Contexto", sondeo: "Sondeo", criticas: "Críticas", metodologia: "Metodología", referencias: "Referencias" };
   CRIT.forEach(function (c, i) { LABEL["c" + (i + 1)] = c; });
   $("jump").innerHTML = PANELS.map(function (id) {
     var m = /^c(\d+)$/.exec(id);
