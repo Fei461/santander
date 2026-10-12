@@ -50,7 +50,7 @@ img { max-width: 100%; }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--body); padding-inline: 16px; padding-block: 0 48px; }
 .wrap { max-width: 1400px; margin: 0 auto; }
-header.top { padding-block: 40px 28px; display: grid; gap: 20px 56px; align-items: end; }
+header.top { padding-block: 36px 28px; display: grid; gap: 20px 56px; align-items: start; }
 .hero-l, .hero-r { display: grid; gap: 14px; min-width: 0; }
 @media (min-width: 1000px) { header.top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
@@ -59,7 +59,7 @@ h1 { font: 800 clamp(30px, 5vw, 48px)/1.05 var(--display); margin: 0; letter-spa
 .note { margin: 0; font-size: 13px; color: var(--muted); }
 a { color: var(--accent); text-underline-offset: 3px; }
 
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 14px; margin-bottom: 20px; min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 14px; align-content: start; margin-bottom: 20px; min-width: 0; }
 .panel-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
 .panel h2 { font: 700 20px/1.2 var(--display); margin: 0; }
 .twocol { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
@@ -114,7 +114,13 @@ nav.jump a:hover { border-color: var(--accent); }
 .vbtn.grade { min-width: 40px; padding: 9px 0; text-align: center; font: 600 15px/1 var(--mono); }
 .vbtn.grade[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
 .verdict .hint { font-style: normal; font-size: 12px; color: var(--muted); flex-basis: 100%; }
-.pill.ours { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+.pill.ours { background: var(--accent-soft); color: var(--accent); border-color: transparent; font: 600 12px/1 var(--mono); padding: 5px 9px; }
+#score-body td { vertical-align: middle; }
+.pros-cons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 28px; padding-top: 14px; border-top: 1px solid var(--line); }
+.pros-cons ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15px; }
+.weights { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 15px; }
+.weight-note { margin: 0; font-size: 14px; color: var(--muted); }
+.weight-note b { color: var(--accent); font-family: var(--mono); margin-right: 4px; }
 .vbtn[aria-pressed="true"][data-v="pass"] { background: var(--pass-soft); border-color: var(--pass); color: var(--pass); }
 .vbtn[aria-pressed="true"][data-v="fail"] { background: var(--fail-soft); border-color: var(--fail); color: var(--fail); }
 
@@ -200,7 +206,7 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid 
 .result { border: 1px solid var(--line); border-radius: 7px; padding: 8px 12px; font: 400 13px/1.4 var(--mono); color: var(--muted); }
 .result b { display: block; font: 500 20px/1.2 var(--mono); color: var(--ink); font-variant-numeric: tabular-nums; }
 
-.wheel svg { width: 100%; height: auto; display: block; max-width: 460px; margin: 0 auto; }
+.wheel svg { width: 100%; height: auto; display: block; max-width: 560px; margin: 0 auto; }
 .wheel .lbl { font: 500 11px var(--mono); fill: var(--ink); }
 .wheel .ax { stroke: var(--line); fill: none; }
 .wheel .axt { font: 400 10px var(--mono); fill: var(--muted); }
@@ -277,10 +283,35 @@ footer a { word-break: break-all; }
     <section class="panel highlight" aria-labelledby="conc-title">
       <div class="panel-head"><h2 id="conc-title">Nuestra conclusión</h2><span class="grade-big"><b>65</b>/75</span></div>
       <p class="ours">El nuevo logotipo consigue mejorar sin romper con el pasado. Responde a la estrategia digital y de modernización del banco (Banco Santander, s. f.; Bustos, 2018): no es una revolución, sino una evolución continuista. Cumple los once criterios de Chaves y Belluccia (2003); sus puntos más débiles son una cercanía que el público apenas percibe y un sistema de submarcas que la guía no documenta.</p>
+      <div class="pros-cons">
+        <div><span class="label">Lo más fuerte</span>
+          <ul>
+            <li>Se lee con claridad: 4,68/5 en el sondeo.</li>
+            <li>El 87 % reconoce la marca solo por la llama.</li>
+            <li>Dos elementos y un color: nada sobra.</li>
+            <li>Se reproduce igual en color, en negro y a 16 px.</li>
+          </ul>
+        </div>
+        <div><span class="label">Lo más débil</span>
+          <ul>
+            <li>Solo un 10 % percibe cercanía.</li>
+            <li>Solo un 61 % lo ve actual.</li>
+            <li>No hay un sistema de submarcas publicado.</li>
+            <li>Los naranjas de la competencia quedan a 23° de tono.</li>
+          </ul>
+        </div>
+      </div>
     </section>
     <section class="panel" aria-labelledby="read-title">
       <div class="panel-head"><h2 id="read-title">Cómo leer las notas</h2></div>
-      <p>Cada criterio se puntúa de 1 a 5, y se cumple con un 3 o más. Pertinencia, Reproducibilidad, Legibilidad y Versatilidad cuentan doble por ser críticas en banca, así que el máximo es 75. Sin ponderar, el resultado apenas cambia: 47 de 55 (85 %) frente a 65 de 75 (87 %).</p>
+      <p>Cada criterio se puntúa de 1 a 5, y se cumple con un 3 o más. Cuatro criterios cuentan doble porque en un banco un fallo en ellos se nota en el día a día de la marca:</p>
+      <ul class="weights">
+        <li><b>Pertinencia</b>: en banca la confianza es el producto; un signo que no parezca de un banco falla en lo esencial.</li>
+        <li><b>Reproducibilidad</b>: la marca aparece a la vez en tarjetas, cajeros, contratos, prensa y pantallas.</li>
+        <li><b>Legibilidad</b>: buena parte de la relación con el cliente ocurre en el móvil, con tamaños de hasta 16 px.</li>
+        <li><b>Versatilidad</b>: es un banco global y multicanal; el mismo signo sirve para una oficina, una app y un patrocinio.</li>
+      </ul>
+      <p>Los otros siete cuentan una vez: son importantes, pero un fallo en ellos no compromete el uso diario de la marca. El máximo es 75. Sin ponderar, el resultado apenas cambia: 47 de 55 (85 %) frente a 65 de 75 (87 %).</p>
       <p class="note">La presentación sigue la regla 10/20/30 (Kawasaki, 2005) y está pensada para un cliente metódico (Cloninger, 1987): cada titular es una conclusión y cada dato se puede comprobar aquí.</p>
     </section>
   </div>
@@ -299,6 +330,8 @@ footer a { word-break: break-all; }
             <tr><td>Cobranding</td><td>Separación de 4 módulos con una línea de 1 pt en el centro</td><td class="pg">p. 9</td></tr>
             <tr><td>Color principal</td><td><span class="swatch" style="background:#ec0000"></span>Santander Red · Pantone 485 C · C0 M100 Y100 K0 · #EC0000</td><td class="pg">p. 12</td></tr>
             <tr><td>Fondos permitidos</td><td>Solo Santander Red, Rio, Lisbon y blanco</td><td class="pg">p. 12</td></tr>
+            <tr><td>Paleta de apoyo</td><td><span class="swatch" style="background:#990000"></span>Boston <span class="swatch" style="background:#cc0000"></span>Madrid <span class="swatch" style="background:#ea6f5d"></span>Mexico City <span class="swatch" style="background:#f0b998"></span>Rio <span class="swatch" style="background:#f5decf"></span>Lisbon <span class="swatch" style="background:#fbf1ea"></span>London</td><td class="pg">p. 12</td></tr>
+            <tr><td>Artes finales</td><td>Cada versión en positivo y negativo, en CMYK, tintas directas (PMS), RGB y blanco y negro</td><td class="pg">p. 10</td></tr>
           </tbody>
         </table>
       </div>
@@ -407,6 +440,7 @@ footer a { word-break: break-all; }
       <div class="ficha-main">
         <div class="ficha-head"><span class="eyebrow">Nuestra valoración · criterio 1</span><span class="grade"><b>4</b>/5 <small>peso ×2</small></span></div>
         <p class="ours">El logotipo anterior respondía a la estética de la banca del siglo pasado: una tipografía con remates clásicos sobre un bloque rojo (Hillier, 2019; Thalassinou, 2018), con un tono distante y rígido. El nuevo se adapta a la estrategia del banco, que quiere presentarse como más digital y abierto (Banco Santander, s. f.). La serifa tradicional da paso a una tipografía humanista, elegida entre las dos propuestas que se presentaron (Monotype, s. f.), pensada para transmitir cercanía, transparencia y agilidad (Chaves y Belluccia, 2003; Costa, 2004). Encaja con la idea de marca democrática: abierta, reconocible y fácil de reproducir y compartir (Laidler-Kylander y Shepard Stenzel, 2014).</p>
+        <p class="weight-note"><b>×2</b> Cuenta doble porque en banca la confianza es el producto: un signo que no parezca de un banco falla en lo esencial.</p>
       </div>
       <dl class="ficha-grid">
         <div><dt>Lo respalda la documentación de Santander</dt><dd>La llama «emite luz, calor y humanidad» y nace de una plataforma sólida; el rojo remite a energía, fuerza, valentía y liderazgo (Banco Santander, 2020, p. 5).</dd></div>
@@ -425,10 +459,9 @@ footer a { word-break: break-all; }
       <div class="verdict" data-test="1"></div>
     </div>
     <div class="bench">
-      <div class="split">
-        <div class="col"><div class="table-light" id="p1-stage"><canvas id="p1-canvas"></canvas></div><p class="readout" id="p1-readout"></p></div>
-        <div class="col"><div class="attrs" id="p1-attrs"></div></div>
-      </div>
+      <div class="table-light" id="p1-stage"><canvas id="p1-canvas"></canvas></div>
+      <div class="attrs" id="p1-attrs"></div>
+      <p class="readout" id="p1-readout"></p>
     </div>
     </article>
 
@@ -438,6 +471,7 @@ footer a { word-break: break-all; }
       <div class="ficha-main">
         <div class="ficha-head"><span class="eyebrow">Nuestra valoración · criterio 2</span><span class="grade"><b>5</b>/5 <small>peso ×2</small></span></div>
         <p class="ours">Con la digitalización de la banca, los remates finos de la serifa anterior podían deformarse o incluso desaparecer (Chaves y Belluccia, 2003; Kane, 2011). El nuevo logotipo elimina esos detalles y el encajonamiento: su peso visual constante garantiza una reproducción fiel en cualquier soporte, físico o digital, desde una valla publicitaria hasta el icono de un reloj inteligente (Bringhurst, 2013). Además, la llama se simplificó sobre una retícula que asegura líneas equidistantes y ángulos uniformes (Monotype, s. f.), y el rojo, ahora más brillante, se adapta mejor a los formatos digitales (Bustos, 2018).</p>
+        <p class="weight-note"><b>×2</b> Cuenta doble porque un banco muestra su marca a la vez en tarjetas, cajeros, contratos, prensa y pantallas: si se reproduce mal en una técnica, falla en miles de puntos de contacto.</p>
       </div>
       <dl class="ficha-grid">
         <div><dt>Lo respalda la documentación de Santander</dt><dd>Versiones positiva y negativa (p. 6), versión en blanco y negro (p. 7) y artes finales en CMYK, PMS, RGB y B/N (p. 10) (Banco Santander, 2020).</dd></div>
@@ -483,6 +517,7 @@ footer a { word-break: break-all; }
       <div class="ficha-main">
         <div class="ficha-head"><span class="eyebrow">Nuestra valoración · criterio 3</span><span class="grade"><b>4</b>/5 <small>peso ×2</small></span></div>
         <p class="ours">La tipografía anterior exigía más tiempo de procesamiento visual por sus detalles, sobre todo a distancia o en pantallas pequeñas (Kane, 2011). La nueva equilibra mejor las formas, el contraste y el espaciado entre letras (Chaves y Belluccia, 2003; Kane, 2011) y forma parte de un sistema tipográfico propio: tras crear la tipografía del logotipo, se desarrollaron otras que adaptan sus formas a cada tamaño de lectura (Monotype, s. f.). El resultado se lee al instante, algo clave en un entorno dominado por pantallas y banners digitales (Díaz Mesa, 2025), y lo que se procesa con facilidad tiende a preferirse (Janiszewski y Meyvis, 2001).</p>
+        <p class="weight-note"><b>×2</b> Cuenta doble porque buena parte de la relación con el cliente ocurre en el móvil, donde el signo convive con tamaños de hasta 16 px.</p>
       </div>
       <dl class="ficha-grid">
         <div><dt>Lo respalda la documentación de Santander</dt><dd>Mínimos de 25 px (principal), 50 px (secundaria) y 16 px (símbolo); espacio de seguridad igual al ancho del símbolo (Banco Santander, 2020, p. 8).</dd></div>
@@ -627,6 +662,7 @@ footer a { word-break: break-all; }
       <div class="ficha-main">
         <div class="ficha-head"><span class="eyebrow">Nuestra valoración · criterio 6</span><span class="grade"><b>5</b>/5 <small>peso ×2</small></span></div>
         <p class="ours">El marco rojo que contenía el logotipo limitaba su adaptación a otros contextos comunicativos (Chaves y Belluccia, 2003). El rediseño se concibió para funcionar en distintos contextos y canales (Brujo, 2018; Monotype, s. f.): al simplificar los elementos, el signo funciona de muchas maneras sin perder coherencia corporativa (Carpio-Jiménez et al., 2024; Chaves y Belluccia, 2003). Como explican Chaves y Belluccia (2003), a partir de un signo serio es fácil lograr versiones informales, y el nuevo logotipo lo consigue.</p>
+        <p class="weight-note"><b>×2</b> Cuenta doble porque es un banco global y multicanal: el mismo signo tiene que funcionar en una oficina, una app y un patrocinio.</p>
       </div>
       <dl class="ficha-grid">
         <div><dt>Lo respalda la documentación de Santander</dt><dd>Tres versiones para tres situaciones (p. 6) y solo cuatro fondos permitidos: Santander Red, Rio, Lisbon y blanco (p. 12) (Banco Santander, 2020).</dd></div>
@@ -1122,7 +1158,7 @@ footer a { word-break: break-all; }
     $("p1-readout").innerHTML = "Percibes <b>" + yes + " de 12</b> atributos · respondidos " + ans + "/12" + (ans === 12 ? (yes >= 8 ? " · cumple el umbral de 8" : " · por debajo del umbral de 8") : "");
   }
   function renderP1() {
-    var cw = widthOf($("p1-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p1-canvas"), cw, ch);
+    var cw = widthOf($("p1-stage")), ch = Math.round(Math.min(260, Math.max(170, cw * 0.26))), r = dpr(), ctx = stage($("p1-canvas"), cw, ch);
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw * r, ch * r);
     center(ctx, fitted("full", RED, cw * r * 0.7, ch * r * 0.42), cw * r / 2, ch * r / 2);
   }
@@ -1138,7 +1174,7 @@ footer a { word-break: break-all; }
   $("p2-seg").innerHTML = MODES.map(function (m, i) { return '<button type="button" data-val="' + m.id + '" aria-pressed="' + (i === 0) + '">' + m.label + "</button>"; }).join("");
   function renderP2() {
     var m = MODES.filter(function (x) { return x.id === seg["p2-mode"]; })[0] || MODES[0];
-    var cw = widthOf($("p2-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p2-canvas"), cw, ch);
+    var cw = widthOf($("p2-stage")), ch = Math.round(Math.min(440, Math.max(220, cw * 0.76))), r = dpr(), ctx = stage($("p2-canvas"), cw, ch);
     ctx.fillStyle = m.bg; ctx.fillRect(0, 0, cw * r, ch * r);
     center(ctx, fitted("full", m.fg, cw * r * 0.72, ch * r * 0.42), cw * r / 2, ch * r / 2);
     $("p2-readout").innerHTML = "Guía: " + m.src + " · figura " + m.fg.toUpperCase() + " sobre " + m.bg.toUpperCase() + " · contraste <b>" + fmt(contrast(m.fg, m.bg), 1) + ":1</b> (WCAG pide 3:1 para gráficos)";
@@ -1171,7 +1207,7 @@ footer a { word-break: break-all; }
   function renderP2b() {
     var g = +$("p2-gen").value;
     $("p2-gen-out").textContent = g === 0 ? "0 · original" : g === 1 ? "1 · primera copia" : g + " · copia de la copia";
-    var src = copyCanvas(g, [26, 26, 28], 255), cw = widthOf($("p2b-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p2b-canvas"), cw, ch);
+    var src = copyCanvas(g, [26, 26, 28], 255), cw = widthOf($("p2b-stage")), ch = Math.round(Math.min(440, Math.max(220, cw * 0.76))), r = dpr(), ctx = stage($("p2b-canvas"), cw, ch);
     ctx.fillStyle = "#f3f1ec"; ctx.fillRect(0, 0, cw * r, ch * r);
     var s = Math.min(cw * r * 0.86 / src.width, ch * r * 0.8 / src.height);
     ctx.drawImage(src, (cw * r - src.width * s) / 2, (ch * r - src.height * s) / 2, src.width * s, src.height * s);
@@ -1199,7 +1235,7 @@ footer a { word-break: break-all; }
     renderP3s(v);
   }
   function renderP3s(v) {
-    var cw = widthOf($("p3s-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p3s-canvas"), cw, ch);
+    var cw = widthOf($("p3s-stage")), ch = Math.round(Math.min(440, Math.max(220, cw * 0.76))), r = dpr(), ctx = stage($("p3s-canvas"), cw, ch);
     var W = cw * r, H = ch * r, guide = getComputedStyle(document.documentElement).getPropertyValue("--guide").trim() || "#6b6bf0";
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H);
     ctx.strokeStyle = "#6b6bf0"; ctx.lineWidth = Math.max(1, r);
@@ -1233,7 +1269,7 @@ footer a { word-break: break-all; }
   /* ---------- 4 Inteligibilidad ---------- */
   var p4Timer = null;
   function p4Blank(msg, showSym) {
-    var cw = widthOf($("p4-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p4-canvas"), cw, ch);
+    var cw = widthOf($("p4-stage")), ch = Math.round(Math.min(440, Math.max(220, cw * 0.76))), r = dpr(), ctx = stage($("p4-canvas"), cw, ch);
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw * r, ch * r);
     if (showSym) { center(ctx, fitted("symbol", RED, cw * r * 0.5, ch * r * 0.62), cw * r / 2, ch * r / 2); return; }
     ctx.fillStyle = "#8a929b"; ctx.font = (14 * r) + "px 'IBM Plex Sans', system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
@@ -1263,7 +1299,7 @@ footer a { word-break: break-all; }
   });
   function renderP5() {
     var blur = +$("p5-blur").value; $("p5-blur-out").textContent = blur + " px";
-    var cw = widthOf($("p5-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), cv = $("p5-canvas"), ctx = stage(cv, cw, ch);
+    var cw = widthOf($("p5-stage")), ch = Math.round(Math.min(440, Math.max(220, cw * 0.76))), r = dpr(), cv = $("p5-canvas"), ctx = stage(cv, cw, ch);
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw * r, ch * r);
     var lh = fitH("full", cw * r * 0.62, ch * r * 0.36);
     center(ctx, styled("full", lh, fx, RED), cw * r / 2, ch * r / 2);
@@ -1298,7 +1334,7 @@ footer a { word-break: break-all; }
   });
   function renderP6() {
     var p = PALETTE[p6sel], fg = lum(p.hex) < 0.3 ? "#FFFFFF" : RED;
-    var cw = widthOf($("p6-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p6-canvas"), cw, ch);
+    var cw = widthOf($("p6-stage")), ch = Math.round(Math.min(440, Math.max(220, cw * 0.76))), r = dpr(), ctx = stage($("p6-canvas"), cw, ch);
     ctx.fillStyle = p.hex; ctx.fillRect(0, 0, cw * r, ch * r);
     center(ctx, fitted("full", fg, cw * r * 0.7, ch * r * 0.4), cw * r / 2, ch * r / 2);
     $("p6-readout").innerHTML = "Fondo <b>" + p.n + "</b> (Pantone " + p.pms + ") · versión " + (fg === RED ? "positiva" : "negativa") + " · contraste <b>" + fmt(contrast(fg, p.hex), 1) + ":1</b> · " +
@@ -1361,7 +1397,7 @@ footer a { word-break: break-all; }
   ];
   $("p7-tiles").innerHTML = ERAS.map(function (e) { return '<figure class="tile"><canvas id="t7-' + e.id + '"></canvas><figcaption><b>' + e.cap + "</b>" + e.sub + "</figcaption></figure>"; }).join("");
   function renderP7() {
-    var cw = Math.max(150, Math.floor($("t7-y2k").parentNode.clientWidth)), ch = cw, r = dpr(), W = cw * r, H = ch * r;
+    var cw = Math.max(150, Math.floor($("t7-y2k").parentNode.clientWidth)), ch = Math.round(cw * 1.2), r = dpr(), W = cw * r, H = ch * r;
     ERAS.forEach(function (e) {
       var ctx = stage($("t7-" + e.id), cw, ch);
       ctx.fillStyle = "#eef0f3"; ctx.fillRect(0, 0, W, H);
@@ -1395,7 +1431,7 @@ footer a { word-break: break-all; }
     { id: "rot", t: function (ctx, img) { ctx.rotate(-0.21); ctx.drawImage(img, -img.width / 2, -img.height / 2); } }
   ];
   function p8Stage(show, msg) {
-    var cw = widthOf($("p8-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p8-canvas"), cw, ch);
+    var cw = widthOf($("p8-stage")), ch = Math.round(Math.min(440, Math.max(220, cw * 0.76))), r = dpr(), ctx = stage($("p8-canvas"), cw, ch);
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw * r, ch * r);
     if (show) { center(ctx, fitted("symbol", RED, cw * r * 0.5, ch * r * 0.62), cw * r / 2, ch * r / 2); return; }
     ctx.fillStyle = "#8a929b"; ctx.font = (14 * r) + "px 'IBM Plex Sans', system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(msg, cw * r / 2, ch * r / 2);
@@ -1471,7 +1507,7 @@ footer a { word-break: break-all; }
     ctx.restore();
   }
   function startP9(round) {
-    var grid = $("p9-grid"), wide = grid.clientWidth >= 640, cols = wide ? 12 : 6, rows = wide ? 6 : 8, n = cols * rows;
+    var grid = $("p9-grid"); grid.style.minHeight = ""; grid.style.alignContent = ""; var wide = grid.clientWidth >= 640, cols = wide ? 12 : 6, rows = wide ? 5 : 8, n = cols * rows;
     grid.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
     var rand = Math.random; p9.target = Math.floor(rand() * n); p9.round = round; p9.misses = 0;
     var html = ""; for (var i = 0; i < n; i++) html += '<button type="button" class="cell" data-i="' + i + '" aria-label="Celda ' + (i + 1) + '"><canvas></canvas></button>';
@@ -1502,9 +1538,12 @@ footer a { word-break: break-all; }
     } else { p9.misses++; b.classList.add("miss"); }
   });
   function idleP9() {
-    var grid = $("p9-grid"); if (grid.childElementCount) return;
+    var grid = $("p9-grid"); if (grid.querySelector(".cell")) return;
+    var wide = grid.clientWidth >= 640, cols = wide ? 12 : 6, rows = wide ? 5 : 8;
     grid.style.gridTemplateColumns = "1fr";
-    grid.innerHTML = '<p class="readout" style="padding:28px;text-align:center">La cuadrícula aparecerá aquí.</p>';
+    grid.style.minHeight = Math.round(((grid.clientWidth - 16 - (cols - 1) * 4) / cols) * rows + (rows - 1) * 4 + 16) + "px";
+    grid.style.alignContent = "center";
+    grid.innerHTML = '<p class="readout" style="text-align:center">La cuadrícula aparecerá aquí al pulsar una ronda.</p>';
   }
 
   /* ---------- 10 Singularidad ---------- */
@@ -1545,7 +1584,7 @@ footer a { word-break: break-all; }
   /* ---------- 11 Declinabilidad ---------- */
   function renderP11() {
     var mode = seg["p11-mode"], v = seg["p11-variant"], text = ($("p11-text").value || "").trim() || "Descriptor";
-    var cw = widthOf($("p11-stage")), ch = Math.round(Math.min(360, Math.max(200, cw * 0.58))), r = dpr(), ctx = stage($("p11-canvas"), cw, ch), W = cw * r, H = ch * r;
+    var cw = widthOf($("p11-stage")), ch = Math.round(Math.min(620, Math.max(280, cw * 1.15))), r = dpr(), ctx = stage($("p11-canvas"), cw, ch), W = cw * r, H = ch * r;
     ctx.fillStyle = "rgba(255,255,255,.88)"; ctx.fillRect(0, 0, W, H);
     var lh = H * (v === "full" ? 0.24 : 0.34), logo, symW, m, partW, total, tries = 0, fs;
     var font = function (px) { return "700 " + px + "px Nunito, 'IBM Plex Sans', sans-serif"; };
